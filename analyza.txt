@@ -1,0 +1,174 @@
+﻿\newpage
+\chapter{Analýza}
+\label{ch:Analýza}
+
+Keďže cieľom tejto práce je implementácia biologicky inšpirovaného algoritmu v jazyku R, tak je potrebné lepšie si ozrejmiť a oboznámiť sa s pojmami, ktoré súvisia s biologicky inšpirovanými algoritmami. Je dôležité pochopiť, čo je to optimalizácia a ako sa formálne zapisuje, pretože hlavným cieľom biologicky inšpirovaných algoritmov je hľadať optimálne riešenia (zvyčajne maximalizačného alebo minimalizačného problému). Ďalej je dôležité poznať aké funkcie a vstupy riešia biologicky inšpirované algoritmy a ako sa delia. Poznať formálny zápis optimalizácie je dôležité aj z pohľadu návrhu a implementácie algoritmu pre lepšiu parametrizáciu a zadanie problému nášmu algoritmu. V neposlednom rade je podstatné pochopiť, aké biologicky inšpirované algoritmy už poznáme, čím sa líšia, a ako sa delia a ako ich najlepšie použiť.
+Cieľom tejto kapitoly a jej sekcií je tieto pojmy ozrejmiť a zasadiť do kontextu návrhu a implementácie biologicky inšpirovaného algoritmu v jazyku R.
+
+\section{Matematická optimalizácia}
+\label{ch:Matematická optimalizácia}
+Matematická optimalizácia je proces
+\begin{my_itemize}
+ \item formulácie a
+ \item riešenia ohraničeného optimalizačného problém vo všeobecnej matematickej forme
+\end{my_itemize}
+
+\begin{equation}  
+    minimize_{w.r.t. x} f(x), x = [x_1, x_2, ... x_n]^T \in \mathbb{R}
+\end{equation}
+
+pre čo platia ohraničenia
+
+\begin{equation}
+g_j(x) ≤ 0, j= 1, 2, . . . , m
+\end{equation}
+\begin{equation}
+h_j(x) = 0, j= 1, 2, . . . , r
+\end{equation}
+
+kde funkcie \(f(x)\), \(g_j(x)\) a \(h_j(x)\) sú skalárne funkcie
+reálneho stĺpcového vektora x. Funkcia \(f(x)\) sa nazýva cieľová funkcia, funkcie \(g_j(x)\) opisujú jednotlivé nerovnostné obmedzenia pre premenné vektora x a funkcie \(h_j(x)\) opisujú obmedzenia rovnosti pre premenné vektora x.
+
+Optimálny vektor x, ktorý rieši optimalizačný problém sa zvyčajne označuje \(x^*\) a hodnota \(f(x^*)\) je optimálna tzn. väčšinou minimálna alebo maximálna, hodnota funkcie\cite{1}.
+
+\subsection{Druhy optimalizačných problémov}
+
+Optimalizačné problémy sa delia podľa rôznych kritérií, najbežnejšie sú:
+
+\begin{my_itemize}
+ \item obmedzenie
+ \item počet cieľov tzn. koľko cieľových funkcií chceme minimalizovať/maximalizovať
+ \item počet uspokojivých riešení
+\end{my_itemize}
+
+\subsubsection{Optimalizačné problémy podľa obmedzenia}
+
+Podľa obmedzení sa problémy delia na:
+
+\begin{my_itemize}
+ \item obmedzené tj. problémy, pre ktoré množina funkcií obmedzení \(g_j(x)\) a \(h_j(x)\) nie je prázdna
+ \item neobmedzené tj. problémy, pre ktoré neexistujú obmedzenia \(g_j(x)\) a \(h_j(x)\)
+\end{my_itemize}
+
+\subsubsection{Optimalizačné problémy podľa počtu cieľov}
+
+Podľa počtu cieľov sa problémy delia:
+\begin{my_itemize}
+ \item jednokriteriálne
+ \item multikriteriálne
+\end{my_itemize}
+
+Pri problémoch s viacerými cieľmi má každý cieľ svoju vlastnú minimálnu hodnotu, avšak pri riešení takýchto úloh treba do úvahy brať rozumný kompromis medzi minimami jednotlivých cieľov. Prípustná miera kompromisu medzi hodnotami cieľových funkcií je často daná obmedzeniami. 
+
+\subsubsection{Optimalizačné problémy podľa počtu uspokojivých riešení}
+
+Podľa počtu uspokojivých riešení sa problémy delia:
+
+\begin{my_itemize}
+ \item unimodálne
+ \item multimodálne
+\end{my_itemize}
+
+Niektoré optimalizačné problémy majú viacero uspokojivých riešení. Problémy, pri ktorých chceme nájsť všetky takéto riešenia sa nazývajú multimodálne. Tieto riešenia môžu byť všetky rovnako dobré, alebo niektoré riešenia môžu byť dobré len pre špecifických podmienkach.
+%\bigskip
+%V tejto práci sa budeme navrhovať a implementovať algoritmus, ktorý rieši aj obmedzené, aj neobmedzené, unimodálne problémy s jedným cieľom.
+
+\subsection{Prehľad spôsobov riešenia optimalizačných problémov}
+
+Na riešenie optimalizačných problémov existuje množstvo spôsobov a venuje sa mu množstvo odborov. Táto práce je hlavne orientovaná na metaheuristky \ref{Metaheuristiky a heuristiky} inšpirované prírodou, ktorým sa budem venovať v ďalších častiach. Ďalšími odbormi, ktoré sa venujú optimalizačným problému sú napríklad dynamické alebo lineárne programovanie.\cite{MetahYang} V tejto časti však ponúknem len zopár príkladov z množstva algoritmov a spôsobov riešenia optimalizačných problémov.
+
+\subsubsection{Dynamické a lineárne programovanie}
+
+Dynamické programovanie je spôsob vytvárania riešení algoritmov, ktorý je založený na princípe rekurencie v určitých optimalizačných problémoch. Pri použití dynamického programovania sa dá predpokladať, že je možné vyrátať hodnotu cieľovej funkcie \(f_k(x)\) z hodnoty cieľovej funkcie \(f_{k-1}(x)\) na základe rekurentného vzťahu. Následne sa vytvorí tabuľka, v ktorej budú všetky možné možnosti a z nich sa vyberie tá najlepšia. Z charakteristiky dynamického programovanie je však vidno, že dynamické programovanie je vhodnejšie pre hľadanie optima z daných diskrétnych hodnôt vektora x.\cite{4}
+
+Problémy lineárneho programovania sú optimalizačné problémy, ktoré spĺňajú vlastnosti proporcionality tzn. ak chceme dvojnásobne zvýšiť výsledok, dvojnásobne zvýšime vstup do problému, nezápornosti tzn. nie je možné použiť záporné vstupy a všeobecne sú charakterizované lineárnymi závislosťami a podmienkami, napr.
+
+\begin{equation}
+    \begin{split}
+    x_1 ... + a_{1,m+1}x_{m+1} ... a_{1,n}x_{n} = b_1\\
+    .               .                   .           .\\
+    .               .                   .           .\\
+    .               .                   .           .\\
+    x_n ... + a_{n,m+1}x_{m+1} ... a_{n,n}x_{n} = b_n\\
+    (-z) ... + c_{m+1}x_{m+1} ...  c_{n}x_{n} = (-z_0)\\
+    \end{split}
+\end{equation}
+
+Prvým a najjednoduchším algoritmom na optimalizáciu problémov lineárneho programovania bol algoritmus simplex.\newline
+Algoritmus simplex je charakterizovaný vytvorením jedného náhodného riešenia na konvexnom geometrickom útvare, ktorého vrcholy sú riešenia lineárneho problému. Algoritmus sa tak pohybuje po hranách ku lepším riešeniam.
+\cite{5}
+
+\subsubsection{Iteratívne metódy}
+
+V dnešnej dobe za pomoci moderných počítačov je jednoduchšie hľadať optimálne riešenie po krokoch, v ktorých sa postupne riešenie zlepšuje, ako hľadať celé riešenie naraz. Takýto postup je charakterizovaný rovnicou
+
+\begin{equation}\label{iteratívný vzorec}
+    x^{t+1} = x^t + \alpha^td^t
+\end{equation}
+
+, kde \(\alpha^t\) je skalár definujúci dĺžku kroku a \(d^t\) je smer hľadania zostupu resp. výstupu. Spôsob hľadanie \(d^t\) je rôzny pre rôzne optimalizačné algoritmy.\cite{3} Najjednoduchšími algoritmami sledujúcimi tento vzorec sú Metóda najstrmšieho výstupu (Steepest descent/ascent method) a Koordinátová metóda najstrmšieho výstupu resp. zostupu (Coordinate steepest descent/ascent method).
+
+Metóda najstrmšieho výstupu resp. zostupu sa dá použiť ak vieme vyrátať parciálne derivácie optimalizačnej funkcie, čo znamená, že vieme určiť gradient \(\nabla f(x) \), čo je vlastne smer výstupu v danom bode funkcie. Potom ak dosadíme do rovnice \ref{iteratívný vzorec} \(d^t = -\nabla f(x)\), vieme s dostatočne malým krokom iterácie \(\alpha^t\) dosiahnuť optimálne riešenie. Dĺžka kroku sa môže rátať pomocou Armijovho pravidla\cite{2}.
+
+\begin{equation}
+ f(x^t - \alpha \nabla f(x^t)) - f(x^t) ≥ −\sigma \alpha ||\nabla f(x^t)||^2
+\end{equation}
+
+Koordinátová metóda najstrmšieho výstupu je odvodená od metódy najstrmšieho výstupu avšak pri každom kroku zlepšujeme výsledok len v ohľade na jedno \(x_i\) z optimalizačnej funkcie \(f(x_1, x_2, ... x_i, ... x_n)\). Tieto časti vektora môžeme optimalizovať v smere zľava doprava, tam a naspäť alebo optimalizujeme komponent s najväčšou absolútnou hodnotou
+\cite{3}.
+
+\section{Metaheuristiky a heuristiky}\label{Metaheuristiky a heuristiky}
+Heuristky sú spôsoby optimalizácie, ktoré negarantujú nájdenie optimálneho riešenia. Tieto spôsoby riešenia optimalizačných problémov fungujú na princípe náhodného hľadania a využívania doteraz nájdených najlepších výsledkov. Metaheuristiky sú heuristiky, ktoré sú nezávislé od jedného problému a je ich možné použiť na veľké množstvo rozličných problémov. Metaheuristiky sú v dnešnej dobe veľmi populárne, pretože ponúkajú rozumný kompromis medzi nájdením nie úplne optimálneho riešenia a nájdením riešenia v rozumnom čase. Najväčším problémom metaheuristík je ako robiť kompromis medzi využívaním najlepšieho nájdeného riešenia a riešení blízko neho (zosilnenie) a prehľadávaním priestoru riešení (diverzifikácia). Obe tieto činnosti sú dôležité, lebo priestor okolo zatiaľ najlepšieho riešenia pravdepodobne ponúka aj ďalšie rovnako dobré alebo lepšie riešenia, avšak tento priestor môže byť priestor lokálneho optima, preto je dôležité ďalej prehľadávať priestor riešení. Ďalšími dôležitými rozhodnutiami pri návrhu a implementácií heuristík a metaheuristík je rozhodnutie ako reprezentovať optimalizačný problém a ako určovať úspešnosť riešenia pomocou cieľovej funkcie.
+
+Efektívna reprezentácia optimalizačného problému je dôležitou časťou navrhovania heuristiky. Efektivita reprezentácie problému je silno ovplyvnená spôsobom výpočtu cieľovej funkcie a spôsobom hľadania v priestore riešení. Reprezentácia musí mať tieto vlastnosti:
+
+\begin{my_itemize}
+ \item \textbf{Úplnosť} - musíme vedieť reprezentovať každé riešenie v priestore riešení. 
+ \item \textbf{Spojitosť} - každé riešenie musí byť nejakým spôsobom dosiahnuteľné
+ \item \textbf{Efektívnosť} - hľadanie nových riešení v priestore riešení musí byť efektívne
+\end{my_itemize}
+
+Reprezentácie riešení môžu byť:
+
+\begin{my_itemize}
+ \item \textbf{Lineárne} - takéto reprezentácie si môžeme predstaviť ako vektor, napr. vektor hodnôt x funkcie, vektor jednotiek a núl, ktoré označujú, či i-ty prvok vektora je použitý.
+ \item \textbf{Nelineárne} - zvyčajne reprezentované grafovou štruktúrou, reprezentujú sa tam stavy jedno k jednej, jedno ku viacerým, viaceré ku jednej, medzi riešeniami a reprezentáciami riešení
+\end{my_itemize}
+
+Vo veľkom množstve problémov môže byť funkcia zadaného optimalizačného problému aj jeho cieľovou funkciou. Typickým príkladom je optimalizácia spojitých viac rozmerných funkcií, kde sa optimum funkcie dá ľahko porovnať ako číslo. Avšak napríklad pri funkciách, ktorých výsledkom je len pravdivostná hodnota, je ťažké odlíšiť lepšie a horšie riešenie. Pri takýchto prípadoch je možné napríklad hodnotiť riešenie podľa toho koľko častí je nesprávnych etc.. Ďalším prípadom cieľovej funkcie, ktorú je potrebné upravovať sú funkcie, ktoré je príliš nákladné počítať. Takéto funkcie môžu byť nahradené funkciou, ktorá ráta odhad tejto funkcie a tak urýchliť beh metaheuristiky\cite{MetaMainBook}.
+
+Metaheuristiky a heuristiky môžeme deliť\cite{ReviewNatureInspired} podľa rôznych kritérií:
+\begin{my_itemize}
+ \item
+ {
+    \textbf{Prírodou inšpirované vs. Ostatné} - Prírodou inšpirované algoritmy môžeme deliť na
+    \begin{my_itemize}
+     \item Biologicky inšpirované \ref{fyz_chem_algo}
+     \item Fyzikou a chémiou inšpirované \ref{bio_algo}
+     \item Ostatné
+    \end{my_itemize} 
+ }
+ \item \textbf{S použitím pamäte vs. Bez použitia pamäte} - heuristiky bez použitia pamäte sú napríklad tie, ktoré používajú princíp Markovovej reťaze, tzn. že si nepamätajú navštívené stavy
+ \item \textbf{Založené na populácií vs. Založené na jednom riešení} - heuristiky založené na jednom riešení používajú len jedno zvyčajne najlepšie riešení a na základe neho ho vylepšujú.
+ 
+ \item \textbf{Deterministické vs. Stochastické}
+\end{my_itemize}
+\cite{MetahYang,MetaMainBook,MetahA}
+
+
+\subsection{Fyzikou a chémiou inšpirované algoritmy}\label{fyz_chem_algo}
+Fyzikou inšpirované algoritmy sú, ako je zrejmé z názvu, optimalizačné algoritmy inšpirované fyzikálnymi procesmi a zákonmi vo vesmíre. Začiatok takýchto algoritmov možno hľadať po publikovaní práce o kvantovo-inšpirovaných počítačoch v roku 1982\cite{QMechComp}. Táto práca otvorila cestu prvému fyzikálne založenému algoritmu v roku 1995 nazvanému Kvantovo-inšpirovaný genetický algoritmus\cite{QIGA}. Hlavný "boom" takýchto algoritmov sa začal po roku 2000, keď sa začali vznikať fyzikálne algoritmy inšpirované rôznymi oblasťami fyzika ako je Newtonov gravitačný zákon (Algoritmus gravitačným hľadaním - GSA, Optimalizácia centrálnou silou - CFO,...), teóriou vesmíru (Big Bang Big Crunch), elektromagnetizmom  alebo kvantovou mechanikou (Kvantovo inšpirovaný roj častíc - QIPS).\cite{PhysicsSurvey}
+\subsubsection{Kvantovo-inšpirovaný genetický algoritmus}
+Tento fyzikálne inšpirovaný algoritmus je prvý z fyzkálne inšpirovaných algoritmov a vznikol v roku 1995. Tento algoritmus je založený  na bežnom genetickom algoritme, kde populácia chromozómov riešení mutuje, kríži sa a na základe následne vypočítanej fitnes funkcie novo vzniknutých jedincov sa vyberie n jedincov do ďalšej generácie. V tomto algoritme sa však pri výpočte neberie do úvahy len "dobrosť" riešenia, ale aj to ako veľmi sa líšia riešenia od najlepšieho riešenia (čím viac, tým lepšie). Takýmto spôsobom sa udržiavame lokálne optimá, ktoré potom pomáhajú pri hľadaní globálnych optím.
+Odlišnosťou tohoto algoritmu od bežného genetického algoritmu je použitie princípu superpozície elektrónov. Superpozícia elektrónov znamená, že podľa toho akú energiu má elektrón, tak sa môže s nejakou pravdepodobnosť nachádzať na viacerých vrstvách okolo jadra atómu. Toto je využité aj v tomto algoritme v zmysle, že existuje viacero vesmírov, kde sa rieši bežný genetický algoritmus a tieto sa môžu navzájom krížiť a mutovať. Toto však môže nastať len medzi génmi v chromozóme na rovnakej pozícií i. Týmto sa simuluje preskakovanie elektrónu z vrstvy na vrstvu.
+\subsubsection{Simulované žíhanie - Simulated anealing}
+\subsubsection{Big Bang Big Crunch}
+\subsection{Biologicky inšpirované algoritmy}\label{bio_algo}
+ Biologicky inšpirované algoritmy sú druhom prírodou inšpirovaných algoritmov, ktoré vznikli na základe pozorovania správania živočíchov alebo procesov ktorými na nich vplývala príroda. Takýto proces je napríklad evolúcia alebo symbióza. Algoritmy sa inšpirovali rôznymi druhmi zvierat, či už malými ako baktérie a salpy, alebo veľkými ako veleryby alebo slony. Zvyčajne sa tieto algoritmy inšpirujú spôsobom hľadania potravy alebo lovu týchto zvierat. Príroda je dobrým zdrojom inšpirácie optimalizačných algoritmov, pretože príroda mala milióny rokov na optimalizáciu správania zvierat a živočíchov. 
+\subsubsection{Návrhové vzory použité pri tvorbe biologicky inšpirovaných algoritmov}
+\subsubsection{Evolučné algoritmy}
+\subsubsection{Rojovo inšpirované algoritmy}
+\subsubsection{Ekológiou inšpirované algoritmy}
+\subsubsection{Umelý imunitný systém}
+\subsection{Biologicky inšpirované algoritmy v CRAN-e}
+
