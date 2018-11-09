@@ -2,7 +2,7 @@
 \chapter{Analýza}
 \label{ch:Analýza}
 
-aKeďže cieľom tejto práce je implementácia biologicky inšpirovaného algoritmu v jazyku R, tak je potrebné lepšie si ozrejmiť a oboznámiť sa s pojmami, ktoré súvisia s biologicky inšpirovanými algoritmami. Je dôležité pochopiť, čo je to optimalizácia a ako sa formálne zapisuje, pretože hlavným cieľom biologicky inšpirovaných algoritmov je hľadať optimálne riešenia (zvyčajne maximalizačného alebo minimalizačného problému). Ďalej je dôležité poznať aké funkcie a vstupy riešia biologicky inšpirované algoritmy a ako sa delia. Poznať formálny zápis optimalizácie je dôležité aj z pohľadu návrhu a implementácie algoritmu pre lepšiu parametrizáciu a zadanie problému nášmu algoritmu. V neposlednom rade je podstatné pochopiť, aké biologicky inšpirované algoritmy už poznáme, čím sa líšia, a ako sa delia a ako ich najlepšie použiť.
+Keďže cieľom tejto práce je implementácia biologicky inšpirovaného algoritmu v jazyku R, tak je potrebné lepšie si ozrejmiť a oboznámiť sa s pojmami, ktoré súvisia s biologicky inšpirovanými algoritmami. Je dôležité pochopiť, čo je to optimalizácia a ako sa formálne zapisuje, pretože hlavným cieľom biologicky inšpirovaných algoritmov je hľadať optimálne riešenia (zvyčajne maximalizačného alebo minimalizačného problému). Ďalej je dôležité poznať aké funkcie a vstupy riešia biologicky inšpirované algoritmy a ako sa delia. Poznať formálny zápis optimalizácie je dôležité aj z pohľadu návrhu a implementácie algoritmu pre lepšiu parametrizáciu a zadanie problému nášmu algoritmu. V neposlednom rade je podstatné pochopiť, aké biologicky inšpirované algoritmy už poznáme, čím sa líšia, a ako sa delia a ako ich najlepšie použiť.
 Cieľom tejto kapitoly a jej sekcií je tieto pojmy ozrejmiť a zasadiť do kontextu návrhu a implementácie biologicky inšpirovaného algoritmu v jazyku R.
 
 \section{Matematická optimalizácia}
@@ -155,20 +155,34 @@ Metaheuristiky a heuristiky môžeme deliť\cite{ReviewNatureInspired} podľa r�
 \end{my_itemize}
 \cite{MetahYang,MetaMainBook,MetahA}
 
-
-\subsection{Fyzikou a chémiou inšpirované algoritmy}\label{fyz_chem_algo}
+\subsection{Prírodou inšpirované algoritmy}
+\subsubsection{Fyzikou a chémiou inšpirované algoritmy}\label{fyz_chem_algo}
 Fyzikou inšpirované algoritmy sú, ako je zrejmé z názvu, optimalizačné algoritmy inšpirované fyzikálnymi procesmi a zákonmi vo vesmíre. Začiatok takýchto algoritmov možno hľadať po publikovaní práce o kvantovo-inšpirovaných počítačoch v roku 1982\cite{QMechComp}. Táto práca otvorila cestu prvému fyzikálne založenému algoritmu v roku 1995 nazvanému Kvantovo-inšpirovaný genetický algoritmus\cite{QIGA}. Hlavný "boom" takýchto algoritmov sa začal po roku 2000, keď sa začali vznikať fyzikálne algoritmy inšpirované rôznymi oblasťami fyzika ako je Newtonov gravitačný zákon (Algoritmus gravitačným hľadaním - GSA, Optimalizácia centrálnou silou - CFO,...), teóriou vesmíru (Big Bang Big Crunch), elektromagnetizmom  alebo kvantovou mechanikou (Kvantovo inšpirovaný roj častíc - QIPS).\cite{PhysicsSurvey}
-\subsubsection{Kvantovo-inšpirovaný genetický algoritmus}
+\subsubsection*{Kvantovo-inšpirovaný genetický algoritmus}
 Tento fyzikálne inšpirovaný algoritmus je prvý z fyzkálne inšpirovaných algoritmov a vznikol v roku 1995. Tento algoritmus je založený  na bežnom genetickom algoritme, kde populácia chromozómov riešení mutuje, kríži sa a na základe následne vypočítanej fitnes funkcie novo vzniknutých jedincov sa vyberie n jedincov do ďalšej generácie. V tomto algoritme sa však pri výpočte neberie do úvahy len "dobrosť" riešenia, ale aj to ako veľmi sa líšia riešenia od najlepšieho riešenia (čím viac, tým lepšie). Takýmto spôsobom sa udržiavame lokálne optimá, ktoré potom pomáhajú pri hľadaní globálnych optím.
-Odlišnosťou tohoto algoritmu od bežného genetického algoritmu je použitie princípu superpozície elektrónov. Superpozícia elektrónov znamená, že podľa toho akú energiu má elektrón, tak sa môže s nejakou pravdepodobnosť nachádzať na viacerých vrstvách okolo jadra atómu. Toto je využité aj v tomto algoritme v zmysle, že existuje viacero vesmírov, kde sa rieši bežný genetický algoritmus a tieto sa môžu navzájom krížiť a mutovať. Toto však môže nastať len medzi génmi v chromozóme na rovnakej pozícií i. Týmto sa simuluje preskakovanie elektrónu z vrstvy na vrstvu.
-\subsubsection{Simulované žíhanie - Simulated anealing}
-\subsubsection{Big Bang Big Crunch}
-\subsection{Biologicky inšpirované algoritmy}\label{bio_algo}
+Odlišnosťou tohoto algoritmu od bežného genetického algoritmu je použitie princípu superpozície elektrónov. Superpozícia elektrónov znamená, že podľa toho akú energiu má elektrón, tak sa môže s nejakou pravdepodobnosť nachádzať na viacerých vrstvách okolo jadra atómu. Toto je využité aj v tomto algoritme v zmysle, že existuje viacero vesmírov, kde sa rieši bežný genetický algoritmus a tieto sa môžu navzájom krížiť a mutovať. Toto však môže nastať len medzi génmi v chromozóme na rovnakej pozícií i. Týmto sa simuluje preskakovanie elektrónu z vrstvy na vrstvu\cite{QIGA}.
+\subsubsection*{Big Bang Big Crunch}
+Big Bang Big Crunch je ďalším fyzikou inšpirovaným algoritmom. Hlavným princípom, ktorým sa tento algoritmus inšpiruje je rozptýlenie hmoty a energie vo vesmíre (Big bang) a následné zhlukovanie tejto hmoty vo vhodných pozíciách ako sa energia vesmíru znižuje (Big crunch). Tento algoritmus je založený na populácií agentov, takže sa dá klasifikovať ako rojový.
+Algoritmus funguje tak, že najprv sa vytvorí počiatočná náhodná populácia v n-rozmernom priestore (Big bang). Potom sa pomocou rovnice\ref{BigCrunchEq} vypočíta "stred hmoty", čiže stred z vygenerovaných bodov (Big crunch). 
+\begin{equation}\label{BigCrunchEq}
+   x^{\xrightarrow{}c} = \frac{\sum_{i=1}^{N}\frac{1}{f^i}x^{-i}}{\sum_{i=1}^{N}\frac{1}{f^i}}
+\end{equation}
+,  \(x^{i}\) je i-ty vygenerovaný bod a \(f^i\) je fitnes funkcia bodu \(x^i\).\newline
+Následne zasa nasleduje fáza "Big bang", ktorá už ale negeneruje body náhodne, ale sú tieto body vygenerované rovnicou \ref{BigBangEq}, ktorá pričíta alebo odčíta číslo na základe normálneho rozdelenia, ktorého variancia sa s pribúdajúcimi iteráciami znižuje.
+\begin{equation}\label{BigBangEq}
+x^{new} = x^{c} + lr/k
+\end{equation}
+,kde \(x^c\) je stred hmoty, l je horný limit parametra, r je náhodné číslo z normálneho rozdelenia a k je počet iterácií.
+Big crunch v tomto algoritme reprezentuje proces exploitácie a Big bang reprezentuje proces explorácie, ktorá sa ale s iteráciami znižuje, kvôli znižovaniu variancie a tým pádom nižšej pravdepodobnosti vysokých čísel. 
+\subsubsection{Biologicky inšpirované algoritmy}\label{bio_algo}
  Biologicky inšpirované algoritmy sú druhom prírodou inšpirovaných algoritmov, ktoré vznikli na základe pozorovania správania živočíchov alebo procesov ktorými na nich vplývala príroda. Takýto proces je napríklad evolúcia alebo symbióza. Algoritmy sa inšpirovali rôznymi druhmi zvierat, či už malými ako baktérie a salpy, alebo veľkými ako veleryby alebo slony. Zvyčajne sa tieto algoritmy inšpirujú spôsobom hľadania potravy alebo lovu týchto zvierat. Príroda je dobrým zdrojom inšpirácie optimalizačných algoritmov, pretože príroda mala milióny rokov na optimalizáciu správania zvierat a živočíchov. 
-\subsubsection{Návrhové vzory použité pri tvorbe biologicky inšpirovaných algoritmov}
-\subsubsection{Evolučné algoritmy}
-\subsubsection{Rojovo inšpirované algoritmy}
-\subsubsection{Ekológiou inšpirované algoritmy}
-\subsubsection{Umelý imunitný systém}
+%\subsubsection*{Návrhové vzory použité pri tvorbe biologicky inšpirovaných algoritmov}
+\subsubsection*{Evolučné a genetické algoritmy}
+\subsubsection*{Rojovo inšpirované algoritmy}
+\subsubsection*{Ekológiou inšpirované algoritmy}
+\subsubsection*{Umelý imunitný systém}
+\subsection{Ostatné}
+
+
 \subsection{Biologicky inšpirované algoritmy v CRAN-e}
 
