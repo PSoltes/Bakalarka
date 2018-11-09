@@ -1,0 +1,2 @@
+# Bakalarka
+Pls dont steal :)
