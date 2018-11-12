@@ -1,87 +1,87 @@
-ï»¿\newpage
-\chapter{AnalÃ½za}
-\label{ch:AnalÃ½za}
+\newpage
+\chapter{Analıza}
+\label{ch:Analıza}
 
-KeÄÅ¾e cieÄ¾om tejto prÃ¡ce je implementÃ¡cia biologicky inÅ¡pirovanÃ©ho algoritmu v jazyku R, tak je potrebnÃ© lepÅ¡ie si ozrejmiÅ¥ a oboznÃ¡miÅ¥ sa s pojmami, ktorÃ© sÃºvisia s biologicky inÅ¡pirovanÃ½mi algoritmami. Je dÃ´leÅ¾itÃ© pochopiÅ¥, Äo je to optimalizÃ¡cia a ako sa formÃ¡lne zapisuje, pretoÅ¾e hlavnÃ½m cieÄ¾om biologicky inÅ¡pirovanÃ½ch algoritmov je hÄ¾adaÅ¥ optimÃ¡lne rieÅ¡enia (zvyÄajne maximalizaÄnÃ©ho alebo minimalizaÄnÃ©ho problÃ©mu). Äalej je dÃ´leÅ¾itÃ© poznaÅ¥ akÃ© funkcie a vstupy rieÅ¡ia biologicky inÅ¡pirovanÃ© algoritmy a ako sa delia. PoznaÅ¥ formÃ¡lny zÃ¡pis optimalizÃ¡cie je dÃ´leÅ¾itÃ© aj z pohÄ¾adu nÃ¡vrhu a implementÃ¡cie algoritmu pre lepÅ¡iu parametrizÃ¡ciu a zadanie problÃ©mu nÃ¡Å¡mu algoritmu. V neposlednom rade je podstatnÃ© pochopiÅ¥, akÃ© biologicky inÅ¡pirovanÃ© algoritmy uÅ¾ poznÃ¡me, ÄÃ­m sa lÃ­Å¡ia, a ako sa delia a ako ich najlepÅ¡ie pouÅ¾iÅ¥.
-CieÄ¾om tejto kapitoly a jej sekciÃ­ je tieto pojmy ozrejmiÅ¥ a zasadiÅ¥ do kontextu nÃ¡vrhu a implementÃ¡cie biologicky inÅ¡pirovanÃ©ho algoritmu v jazyku R.
+Keïe cie¾om tejto práce je implementácia biologicky inšpirovaného algoritmu v jazyku R, tak je potrebné lepšie si ozrejmi a oboznámi sa s pojmami, ktoré súvisia s biologicky inšpirovanımi algoritmami. Je dôleité pochopi, èo je to optimalizácia a ako sa formálne zapisuje, pretoe hlavnım cie¾om biologicky inšpirovanıch algoritmov je h¾ada optimálne riešenia (zvyèajne maximalizaèného alebo minimalizaèného problému). Ïalej je dôleité pozna aké funkcie a vstupy riešia biologicky inšpirované algoritmy a ako sa delia. Pozna formálny zápis optimalizácie je dôleité aj z poh¾adu návrhu a implementácie algoritmu pre lepšiu parametrizáciu a zadanie problému nášmu algoritmu. V neposlednom rade je podstatné pochopi, aké biologicky inšpirované algoritmy u poznáme, èím sa líšia, a ako sa delia a ako ich najlepšie poui.
+Cie¾om tejto kapitoly a jej sekcií je tieto pojmy ozrejmi a zasadi do kontextu návrhu a implementácie biologicky inšpirovaného algoritmu v jazyku R.
 
-\section{MatematickÃ¡ optimalizÃ¡cia}
-\label{ch:MatematickÃ¡ optimalizÃ¡cia}
-MatematickÃ¡ optimalizÃ¡cia je proces
+\section{Matematická optimalizácia}
+\label{ch:Matematická optimalizácia}
+Matematická optimalizácia je proces
 \begin{my_itemize}
- \item formulÃ¡cie a
- \item rieÅ¡enia ohraniÄenÃ©ho optimalizaÄnÃ©ho problÃ©m vo vÅ¡eobecnej matematickej forme
+ \item formulácie a
+ \item riešenia ohranièeného optimalizaèného problém vo všeobecnej matematickej forme
 \end{my_itemize}
 
 \begin{equation}  
     minimize_{w.r.t. x} f(x), x = [x_1, x_2, ... x_n]^T \in \mathbb{R}
 \end{equation}
 
-pre Äo platia ohraniÄenia
+pre èo platia ohranièenia
 
 \begin{equation}
-g_j(x) â‰¤ 0, j= 1, 2, . . . , m
+g_j(x) ? 0, j= 1, 2, . . . , m
 \end{equation}
 \begin{equation}
 h_j(x) = 0, j= 1, 2, . . . , r
 \end{equation}
 
-kde funkcie \(f(x)\), \(g_j(x)\) a \(h_j(x)\) sÃº skalÃ¡rne funkcie
-reÃ¡lneho stÄºpcovÃ©ho vektora x. Funkcia \(f(x)\) sa nazÃ½va cieÄ¾ovÃ¡ funkcia, funkcie \(g_j(x)\) opisujÃº jednotlivÃ© nerovnostnÃ© obmedzenia pre premennÃ© vektora x a funkcie \(h_j(x)\) opisujÃº obmedzenia rovnosti pre premennÃ© vektora x.
+kde funkcie \(f(x)\), \(g_j(x)\) a \(h_j(x)\) sú skalárne funkcie
+reálneho ståpcového vektora x. Funkcia \(f(x)\) sa nazıva cie¾ová funkcia, funkcie \(g_j(x)\) opisujú jednotlivé nerovnostné obmedzenia pre premenné vektora x a funkcie \(h_j(x)\) opisujú obmedzenia rovnosti pre premenné vektora x.
 
-OptimÃ¡lny vektor x, ktorÃ½ rieÅ¡i optimalizaÄnÃ½ problÃ©m sa zvyÄajne oznaÄuje \(x^*\) a hodnota \(f(x^*)\) je optimÃ¡lna tzn. vÃ¤ÄÅ¡inou minimÃ¡lna alebo maximÃ¡lna, hodnota funkcie\cite{1}.
+Optimálny vektor x, ktorı rieši optimalizaènı problém sa zvyèajne oznaèuje \(x^*\) a hodnota \(f(x^*)\) je optimálna tzn. väèšinou minimálna alebo maximálna, hodnota funkcie\cite{1}.
 
-\subsection{Druhy optimalizaÄnÃ½ch problÃ©mov}
+\subsection{Druhy optimalizaènıch problémov}
 
-OptimalizaÄnÃ© problÃ©my sa delia podÄ¾a rÃ´znych kritÃ©riÃ­, najbeÅ¾nejÅ¡ie sÃº:
+Optimalizaèné problémy sa delia pod¾a rôznych kritérií, najbenejšie sú:
 
 \begin{my_itemize}
  \item obmedzenie
- \item poÄet cieÄ¾ov tzn. koÄ¾ko cieÄ¾ovÃ½ch funkciÃ­ chceme minimalizovaÅ¥/maximalizovaÅ¥
- \item poÄet uspokojivÃ½ch rieÅ¡enÃ­
+ \item poèet cie¾ov tzn. ko¾ko cie¾ovıch funkcií chceme minimalizova/maximalizova
+ \item poèet uspokojivıch riešení
 \end{my_itemize}
 
-\subsubsection{OptimalizaÄnÃ© problÃ©my podÄ¾a obmedzenia}
+\subsubsection{Optimalizaèné problémy pod¾a obmedzenia}
 
-PodÄ¾a obmedzenÃ­ sa problÃ©my delia na:
+Pod¾a obmedzení sa problémy delia na:
 
 \begin{my_itemize}
- \item obmedzenÃ© tj. problÃ©my, pre ktorÃ© mnoÅ¾ina funkciÃ­ obmedzenÃ­ \(g_j(x)\) a \(h_j(x)\) nie je prÃ¡zdna
- \item neobmedzenÃ© tj. problÃ©my, pre ktorÃ© neexistujÃº obmedzenia \(g_j(x)\) a \(h_j(x)\)
+ \item obmedzené tj. problémy, pre ktoré mnoina funkcií obmedzení \(g_j(x)\) a \(h_j(x)\) nie je prázdna
+ \item neobmedzené tj. problémy, pre ktoré neexistujú obmedzenia \(g_j(x)\) a \(h_j(x)\)
 \end{my_itemize}
 
-\subsubsection{OptimalizaÄnÃ© problÃ©my podÄ¾a poÄtu cieÄ¾ov}
+\subsubsection{Optimalizaèné problémy pod¾a poètu cie¾ov}
 
-PodÄ¾a poÄtu cieÄ¾ov sa problÃ©my delia:
+Pod¾a poètu cie¾ov sa problémy delia:
 \begin{my_itemize}
- \item jednokriteriÃ¡lne
- \item multikriteriÃ¡lne
+ \item jednokriteriálne
+ \item multikriteriálne
 \end{my_itemize}
 
-Pri problÃ©moch s viacerÃ½mi cieÄ¾mi mÃ¡ kaÅ¾dÃ½ cieÄ¾ svoju vlastnÃº minimÃ¡lnu hodnotu, avÅ¡ak pri rieÅ¡enÃ­ takÃ½chto Ãºloh treba do Ãºvahy braÅ¥ rozumnÃ½ kompromis medzi minimami jednotlivÃ½ch cieÄ¾ov. PrÃ­pustnÃ¡ miera kompromisu medzi hodnotami cieÄ¾ovÃ½ch funkciÃ­ je Äasto danÃ¡ obmedzeniami. 
+Pri problémoch s viacerımi cie¾mi má kadı cie¾ svoju vlastnú minimálnu hodnotu, avšak pri riešení takıchto úloh treba do úvahy bra rozumnı kompromis medzi minimami jednotlivıch cie¾ov. Prípustná miera kompromisu medzi hodnotami cie¾ovıch funkcií je èasto daná obmedzeniami. 
 
-\subsubsection{OptimalizaÄnÃ© problÃ©my podÄ¾a poÄtu uspokojivÃ½ch rieÅ¡enÃ­}
+\subsubsection{Optimalizaèné problémy pod¾a poètu uspokojivıch riešení}
 
-PodÄ¾a poÄtu uspokojivÃ½ch rieÅ¡enÃ­ sa problÃ©my delia:
+Pod¾a poètu uspokojivıch riešení sa problémy delia:
 
 \begin{my_itemize}
- \item unimodÃ¡lne
- \item multimodÃ¡lne
+ \item unimodálne
+ \item multimodálne
 \end{my_itemize}
 
-NiektorÃ© optimalizaÄnÃ© problÃ©my majÃº viacero uspokojivÃ½ch rieÅ¡enÃ­. ProblÃ©my, pri ktorÃ½ch chceme nÃ¡jsÅ¥ vÅ¡etky takÃ©to rieÅ¡enia sa nazÃ½vajÃº multimodÃ¡lne. Tieto rieÅ¡enia mÃ´Å¾u byÅ¥ vÅ¡etky rovnako dobrÃ©, alebo niektorÃ© rieÅ¡enia mÃ´Å¾u byÅ¥ dobrÃ© len pre Å¡pecifickÃ½ch podmienkach.
+Niektoré optimalizaèné problémy majú viacero uspokojivıch riešení. Problémy, pri ktorıch chceme nájs všetky takéto riešenia sa nazıvajú multimodálne. Tieto riešenia môu by všetky rovnako dobré, alebo niektoré riešenia môu by dobré len pre špecifickıch podmienkach.
 %\bigskip
-%V tejto prÃ¡ci sa budeme navrhovaÅ¥ a implementovaÅ¥ algoritmus, ktorÃ½ rieÅ¡i aj obmedzenÃ©, aj neobmedzenÃ©, unimodÃ¡lne problÃ©my s jednÃ½m cieÄ¾om.
+%V tejto práci sa budeme navrhova a implementova algoritmus, ktorı rieši aj obmedzené, aj neobmedzené, unimodálne problémy s jednım cie¾om.
 
-\subsection{PrehÄ¾ad spÃ´sobov rieÅ¡enia optimalizaÄnÃ½ch problÃ©mov}
+\subsection{Preh¾ad spôsobov riešenia optimalizaènıch problémov}
 
-Na rieÅ¡enie optimalizaÄnÃ½ch problÃ©mov existuje mnoÅ¾stvo spÃ´sobov a venuje sa mu mnoÅ¾stvo odborov. TÃ¡to prÃ¡ce je hlavne orientovanÃ¡ na metaheuristky \ref{Metaheuristiky a heuristiky} inÅ¡pirovanÃ© prÃ­rodou, ktorÃ½m sa budem venovaÅ¥ v ÄalÅ¡Ã­ch Äastiach. ÄalÅ¡Ã­mi odbormi, ktorÃ© sa venujÃº optimalizaÄnÃ½m problÃ©mu sÃº naprÃ­klad dynamickÃ© alebo lineÃ¡rne programovanie.\cite{MetahYang} V tejto Äasti vÅ¡ak ponÃºknem len zopÃ¡r prÃ­kladov z mnoÅ¾stva algoritmov a spÃ´sobov rieÅ¡enia optimalizaÄnÃ½ch problÃ©mov.
+Na riešenie optimalizaènıch problémov existuje mnostvo spôsobov a venuje sa mu mnostvo odborov. Táto práce je hlavne orientovaná na metaheuristky \ref{Metaheuristiky a heuristiky} inšpirované prírodou, ktorım sa budem venova v ïalších èastiach. Ïalšími odbormi, ktoré sa venujú optimalizaènım problému sú napríklad dynamické alebo lineárne programovanie.\cite{MetahYang} V tejto èasti však ponúknem len zopár príkladov z mnostva algoritmov a spôsobov riešenia optimalizaènıch problémov.
 
-\subsubsection{DynamickÃ© a lineÃ¡rne programovanie}
+\subsubsection{Dynamické a lineárne programovanie}
 
-DynamickÃ© programovanie je spÃ´sob vytvÃ¡rania rieÅ¡enÃ­ algoritmov, ktorÃ½ je zaloÅ¾enÃ½ na princÃ­pe rekurencie v urÄitÃ½ch optimalizaÄnÃ½ch problÃ©moch. Pri pouÅ¾itÃ­ dynamickÃ©ho programovania sa dÃ¡ predpokladaÅ¥, Å¾e je moÅ¾nÃ© vyrÃ¡taÅ¥ hodnotu cieÄ¾ovej funkcie \(f_k(x)\) z hodnoty cieÄ¾ovej funkcie \(f_{k-1}(x)\) na zÃ¡klade rekurentnÃ©ho vzÅ¥ahu. NÃ¡sledne sa vytvorÃ­ tabuÄ¾ka, v ktorej budÃº vÅ¡etky moÅ¾nÃ© moÅ¾nosti a z nich sa vyberie tÃ¡ najlepÅ¡ia. Z charakteristiky dynamickÃ©ho programovanie je vÅ¡ak vidno, Å¾e dynamickÃ© programovanie je vhodnejÅ¡ie pre hÄ¾adanie optima z danÃ½ch diskrÃ©tnych hodnÃ´t vektora x.\cite{4}
+Dynamické programovanie je spôsob vytvárania riešení algoritmov, ktorı je zaloenı na princípe rekurencie v urèitıch optimalizaènıch problémoch. Pri pouití dynamického programovania sa dá predpoklada, e je moné vyráta hodnotu cie¾ovej funkcie \(f_k(x)\) z hodnoty cie¾ovej funkcie \(f_{k-1}(x)\) na základe rekurentného vzahu. Následne sa vytvorí tabu¾ka, v ktorej budú všetky moné monosti a z nich sa vyberie tá najlepšia. Z charakteristiky dynamického programovanie je však vidno, e dynamické programovanie je vhodnejšie pre h¾adanie optima z danıch diskrétnych hodnôt vektora x.\cite{4}
 
-ProblÃ©my lineÃ¡rneho programovania sÃº optimalizaÄnÃ© problÃ©my, ktorÃ© spÄºÅˆajÃº vlastnosti proporcionality tzn. ak chceme dvojnÃ¡sobne zvÃ½Å¡iÅ¥ vÃ½sledok, dvojnÃ¡sobne zvÃ½Å¡ime vstup do problÃ©mu, nezÃ¡pornosti tzn. nie je moÅ¾nÃ© pouÅ¾iÅ¥ zÃ¡pornÃ© vstupy a vÅ¡eobecne sÃº charakterizovanÃ© lineÃ¡rnymi zÃ¡vislosÅ¥ami a podmienkami, napr.
+Problémy lineárneho programovania sú optimalizaèné problémy, ktoré spåòajú vlastnosti proporcionality tzn. ak chceme dvojnásobne zvıši vısledok, dvojnásobne zvıšime vstup do problému, nezápornosti tzn. nie je moné poui záporné vstupy a všeobecne sú charakterizované lineárnymi závislosami a podmienkami, napr.
 
 \begin{equation}
     \begin{split}
@@ -94,95 +94,99 @@ ProblÃ©my lineÃ¡rneho programovania sÃº optimalizaÄnÃ© problÃ©my, ktorÃ© spÄºÅˆ
     \end{split}
 \end{equation}
 
-PrvÃ½m a najjednoduchÅ¡Ã­m algoritmom na optimalizÃ¡ciu problÃ©mov lineÃ¡rneho programovania bol algoritmus simplex.\newline
-Algoritmus simplex je charakterizovanÃ½ vytvorenÃ­m jednÃ©ho nÃ¡hodnÃ©ho rieÅ¡enia na konvexnom geometrickom Ãºtvare, ktorÃ©ho vrcholy sÃº rieÅ¡enia lineÃ¡rneho problÃ©mu. Algoritmus sa tak pohybuje po hranÃ¡ch ku lepÅ¡Ã­m rieÅ¡eniam.
+Prvım a najjednoduchším algoritmom na optimalizáciu problémov lineárneho programovania bol algoritmus simplex.\newline
+Algoritmus simplex je charakterizovanı vytvorením jedného náhodného riešenia na konvexnom geometrickom útvare, ktorého vrcholy sú riešenia lineárneho problému. Algoritmus sa tak pohybuje po hranách ku lepším riešeniam.
 \cite{5}
 
-\subsubsection{IteratÃ­vne metÃ³dy}
+\subsubsection{Iteratívne metódy}
 
-V dneÅ¡nej dobe za pomoci modernÃ½ch poÄÃ­taÄov je jednoduchÅ¡ie hÄ¾adaÅ¥ optimÃ¡lne rieÅ¡enie po krokoch, v ktorÃ½ch sa postupne rieÅ¡enie zlepÅ¡uje, ako hÄ¾adaÅ¥ celÃ© rieÅ¡enie naraz. TakÃ½to postup je charakterizovanÃ½ rovnicou
+V dnešnej dobe za pomoci modernıch poèítaèov je jednoduchšie h¾ada optimálne riešenie po krokoch, v ktorıch sa postupne riešenie zlepšuje, ako h¾ada celé riešenie naraz. Takıto postup je charakterizovanı rovnicou
 
-\begin{equation}\label{iteratÃ­vnÃ½ vzorec}
+\begin{equation}\label{iteratívnı vzorec}
     x^{t+1} = x^t + \alpha^td^t
 \end{equation}
 
-, kde \(\alpha^t\) je skalÃ¡r definujÃºci dÄºÅ¾ku kroku a \(d^t\) je smer hÄ¾adania zostupu resp. vÃ½stupu. SpÃ´sob hÄ¾adanie \(d^t\) je rÃ´zny pre rÃ´zne optimalizaÄnÃ© algoritmy.\cite{3} NajjednoduchÅ¡Ã­mi algoritmami sledujÃºcimi tento vzorec sÃº MetÃ³da najstrmÅ¡ieho vÃ½stupu (Steepest descent/ascent method) a KoordinÃ¡tovÃ¡ metÃ³da najstrmÅ¡ieho vÃ½stupu resp. zostupu (Coordinate steepest descent/ascent method).
+, kde \(\alpha^t\) je skalár definujúci dåku kroku a \(d^t\) je smer h¾adania zostupu resp. vıstupu. Spôsob h¾adanie \(d^t\) je rôzny pre rôzne optimalizaèné algoritmy.\cite{3} Najjednoduchšími algoritmami sledujúcimi tento vzorec sú Metóda najstrmšieho vıstupu (Steepest descent/ascent method) a Koordinátová metóda najstrmšieho vıstupu resp. zostupu (Coordinate steepest descent/ascent method).
 
-MetÃ³da najstrmÅ¡ieho vÃ½stupu resp. zostupu sa dÃ¡ pouÅ¾iÅ¥ ak vieme vyrÃ¡taÅ¥ parciÃ¡lne derivÃ¡cie optimalizaÄnej funkcie, Äo znamenÃ¡, Å¾e vieme urÄiÅ¥ gradient \(\nabla f(x) \), Äo je vlastne smer vÃ½stupu v danom bode funkcie. Potom ak dosadÃ­me do rovnice \ref{iteratÃ­vnÃ½ vzorec} \(d^t = -\nabla f(x)\), vieme s dostatoÄne malÃ½m krokom iterÃ¡cie \(\alpha^t\) dosiahnuÅ¥ optimÃ¡lne rieÅ¡enie. DÄºÅ¾ka kroku sa mÃ´Å¾e rÃ¡taÅ¥ pomocou Armijovho pravidla\cite{2}.
+Metóda najstrmšieho vıstupu resp. zostupu sa dá poui ak vieme vyráta parciálne derivácie optimalizaènej funkcie, èo znamená, e vieme urèi gradient \(\nabla f(x) \), èo je vlastne smer vıstupu v danom bode funkcie. Potom ak dosadíme do rovnice \ref{iteratívnı vzorec} \(d^t = -\nabla f(x)\), vieme s dostatoène malım krokom iterácie \(\alpha^t\) dosiahnu optimálne riešenie. Dåka kroku sa môe ráta pomocou Armijovho pravidla\cite{2}.
 
 \begin{equation}
- f(x^t - \alpha \nabla f(x^t)) - f(x^t) â‰¥ âˆ’\sigma \alpha ||\nabla f(x^t)||^2
+ f(x^t - \alpha \nabla f(x^t)) - f(x^t) ? ?\sigma \alpha ||\nabla f(x^t)||^2
 \end{equation}
 
-KoordinÃ¡tovÃ¡ metÃ³da najstrmÅ¡ieho vÃ½stupu je odvodenÃ¡ od metÃ³dy najstrmÅ¡ieho vÃ½stupu avÅ¡ak pri kaÅ¾dom kroku zlepÅ¡ujeme vÃ½sledok len v ohÄ¾ade na jedno \(x_i\) z optimalizaÄnej funkcie \(f(x_1, x_2, ... x_i, ... x_n)\). Tieto Äasti vektora mÃ´Å¾eme optimalizovaÅ¥ v smere zÄ¾ava doprava, tam a naspÃ¤Å¥ alebo optimalizujeme komponent s najvÃ¤ÄÅ¡ou absolÃºtnou hodnotou
+Koordinátová metóda najstrmšieho vıstupu je odvodená od metódy najstrmšieho vıstupu avšak pri kadom kroku zlepšujeme vısledok len v oh¾ade na jedno \(x_i\) z optimalizaènej funkcie \(f(x_1, x_2, ... x_i, ... x_n)\). Tieto èasti vektora môeme optimalizova v smere z¾ava doprava, tam a naspä alebo optimalizujeme komponent s najväèšou absolútnou hodnotou
 \cite{3}.
 
 \section{Metaheuristiky a heuristiky}\label{Metaheuristiky a heuristiky}
-Heuristky sÃº spÃ´soby optimalizÃ¡cie, ktorÃ© negarantujÃº nÃ¡jdenie optimÃ¡lneho rieÅ¡enia. Tieto spÃ´soby rieÅ¡enia optimalizaÄnÃ½ch problÃ©mov fungujÃº na princÃ­pe nÃ¡hodnÃ©ho hÄ¾adania a vyuÅ¾Ã­vania doteraz nÃ¡jdenÃ½ch najlepÅ¡Ã­ch vÃ½sledkov. Metaheuristiky sÃº heuristiky, ktorÃ© sÃº nezÃ¡vislÃ© od jednÃ©ho problÃ©mu a je ich moÅ¾nÃ© pouÅ¾iÅ¥ na veÄ¾kÃ© mnoÅ¾stvo rozliÄnÃ½ch problÃ©mov. Metaheuristiky sÃº v dneÅ¡nej dobe veÄ¾mi populÃ¡rne, pretoÅ¾e ponÃºkajÃº rozumnÃ½ kompromis medzi nÃ¡jdenÃ­m nie Ãºplne optimÃ¡lneho rieÅ¡enia a nÃ¡jdenÃ­m rieÅ¡enia v rozumnom Äase. NajvÃ¤ÄÅ¡Ã­m problÃ©mom metaheuristÃ­k je ako robiÅ¥ kompromis medzi vyuÅ¾Ã­vanÃ­m najlepÅ¡ieho nÃ¡jdenÃ©ho rieÅ¡enia a rieÅ¡enÃ­ blÃ­zko neho (zosilnenie) a prehÄ¾adÃ¡vanÃ­m priestoru rieÅ¡enÃ­ (diverzifikÃ¡cia). Obe tieto Äinnosti sÃº dÃ´leÅ¾itÃ©, lebo priestor okolo zatiaÄ¾ najlepÅ¡ieho rieÅ¡enia pravdepodobne ponÃºka aj ÄalÅ¡ie rovnako dobrÃ© alebo lepÅ¡ie rieÅ¡enia, avÅ¡ak tento priestor mÃ´Å¾e byÅ¥ priestor lokÃ¡lneho optima, preto je dÃ´leÅ¾itÃ© Äalej prehÄ¾adÃ¡vaÅ¥ priestor rieÅ¡enÃ­. ÄalÅ¡Ã­mi dÃ´leÅ¾itÃ½mi rozhodnutiami pri nÃ¡vrhu a implementÃ¡ciÃ­ heuristÃ­k a metaheuristÃ­k je rozhodnutie ako reprezentovaÅ¥ optimalizaÄnÃ½ problÃ©m a ako urÄovaÅ¥ ÃºspeÅ¡nosÅ¥ rieÅ¡enia pomocou cieÄ¾ovej funkcie.
+Heuristky sú spôsoby optimalizácie, ktoré negarantujú nájdenie optimálneho riešenia. Tieto spôsoby riešenia optimalizaènıch problémov fungujú na princípe náhodného h¾adania a vyuívania doteraz nájdenıch najlepších vısledkov. Metaheuristiky sú heuristiky, ktoré sú nezávislé od jedného problému a je ich moné poui na ve¾ké mnostvo rozliènıch problémov. Metaheuristiky sú v dnešnej dobe ve¾mi populárne, pretoe ponúkajú rozumnı kompromis medzi nájdením nie úplne optimálneho riešenia a nájdením riešenia v rozumnom èase. Najväèším problémom metaheuristík je ako robi kompromis medzi vyuívaním najlepšieho nájdeného riešenia a riešení blízko neho (zosilnenie) a preh¾adávaním priestoru riešení (diverzifikácia). Obe tieto èinnosti sú dôleité, lebo priestor okolo zatia¾ najlepšieho riešenia pravdepodobne ponúka aj ïalšie rovnako dobré alebo lepšie riešenia, avšak tento priestor môe by priestor lokálneho optima, preto je dôleité ïalej preh¾adáva priestor riešení. Ïalšími dôleitımi rozhodnutiami pri návrhu a implementácií heuristík a metaheuristík je rozhodnutie ako reprezentova optimalizaènı problém a ako urèova úspešnos riešenia pomocou cie¾ovej funkcie.
 
-EfektÃ­vna reprezentÃ¡cia optimalizaÄnÃ©ho problÃ©mu je dÃ´leÅ¾itou ÄasÅ¥ou navrhovania heuristiky. Efektivita reprezentÃ¡cie problÃ©mu je silno ovplyvnenÃ¡ spÃ´sobom vÃ½poÄtu cieÄ¾ovej funkcie a spÃ´sobom hÄ¾adania v priestore rieÅ¡enÃ­. ReprezentÃ¡cia musÃ­ maÅ¥ tieto vlastnosti:
-
-\begin{my_itemize}
- \item \textbf{ÃšplnosÅ¥} - musÃ­me vedieÅ¥ reprezentovaÅ¥ kaÅ¾dÃ© rieÅ¡enie v priestore rieÅ¡enÃ­. 
- \item \textbf{SpojitosÅ¥} - kaÅ¾dÃ© rieÅ¡enie musÃ­ byÅ¥ nejakÃ½m spÃ´sobom dosiahnuteÄ¾nÃ©
- \item \textbf{EfektÃ­vnosÅ¥} - hÄ¾adanie novÃ½ch rieÅ¡enÃ­ v priestore rieÅ¡enÃ­ musÃ­ byÅ¥ efektÃ­vne
-\end{my_itemize}
-
-ReprezentÃ¡cie rieÅ¡enÃ­ mÃ´Å¾u byÅ¥:
+Efektívna reprezentácia optimalizaèného problému je dôleitou èasou navrhovania heuristiky. Efektivita reprezentácie problému je silno ovplyvnená spôsobom vıpoètu cie¾ovej funkcie a spôsobom h¾adania v priestore riešení. Reprezentácia musí ma tieto vlastnosti:
 
 \begin{my_itemize}
- \item \textbf{LineÃ¡rne} - takÃ©to reprezentÃ¡cie si mÃ´Å¾eme predstaviÅ¥ ako vektor, napr. vektor hodnÃ´t x funkcie, vektor jednotiek a nÃºl, ktorÃ© oznaÄujÃº, Äi i-ty prvok vektora je pouÅ¾itÃ½.
- \item \textbf{NelineÃ¡rne} - zvyÄajne reprezentovanÃ© grafovou Å¡truktÃºrou, reprezentujÃº sa tam stavy jedno k jednej, jedno ku viacerÃ½m, viacerÃ© ku jednej, medzi rieÅ¡eniami a reprezentÃ¡ciami rieÅ¡enÃ­
+ \item \textbf{Úplnos} - musíme vedie reprezentova kadé riešenie v priestore riešení. 
+ \item \textbf{Spojitos} - kadé riešenie musí by nejakım spôsobom dosiahnute¾né
+ \item \textbf{Efektívnos} - h¾adanie novıch riešení v priestore riešení musí by efektívne
 \end{my_itemize}
 
-Vo veÄ¾kom mnoÅ¾stve problÃ©mov mÃ´Å¾e byÅ¥ funkcia zadanÃ©ho optimalizaÄnÃ©ho problÃ©mu aj jeho cieÄ¾ovou funkciou. TypickÃ½m prÃ­kladom je optimalizÃ¡cia spojitÃ½ch viac rozmernÃ½ch funkciÃ­, kde sa optimum funkcie dÃ¡ Ä¾ahko porovnaÅ¥ ako ÄÃ­slo. AvÅ¡ak naprÃ­klad pri funkciÃ¡ch, ktorÃ½ch vÃ½sledkom je len pravdivostnÃ¡ hodnota, je Å¥aÅ¾kÃ© odlÃ­Å¡iÅ¥ lepÅ¡ie a horÅ¡ie rieÅ¡enie. Pri takÃ½chto prÃ­padoch je moÅ¾nÃ© naprÃ­klad hodnotiÅ¥ rieÅ¡enie podÄ¾a toho koÄ¾ko ÄastÃ­ je nesprÃ¡vnych etc.. ÄalÅ¡Ã­m prÃ­padom cieÄ¾ovej funkcie, ktorÃº je potrebnÃ© upravovaÅ¥ sÃº funkcie, ktorÃ© je prÃ­liÅ¡ nÃ¡kladnÃ© poÄÃ­taÅ¥. TakÃ©to funkcie mÃ´Å¾u byÅ¥ nahradenÃ© funkciou, ktorÃ¡ rÃ¡ta odhad tejto funkcie a tak urÃ½chliÅ¥ beh metaheuristiky\cite{MetaMainBook}.
+Reprezentácie riešení môu by:
 
-Metaheuristiky a heuristiky mÃ´Å¾eme deliÅ¥\cite{ReviewNatureInspired} podÄ¾a rÃ´znych kritÃ©riÃ­:
+\begin{my_itemize}
+ \item \textbf{Lineárne} - takéto reprezentácie si môeme predstavi ako vektor, napr. vektor hodnôt x funkcie, vektor jednotiek a núl, ktoré oznaèujú, èi i-ty prvok vektora je pouitı.
+ \item \textbf{Nelineárne} - zvyèajne reprezentované grafovou štruktúrou, reprezentujú sa tam stavy jedno k jednej, jedno ku viacerım, viaceré ku jednej, medzi riešeniami a reprezentáciami riešení
+\end{my_itemize}
+
+Vo ve¾kom mnostve problémov môe by funkcia zadaného optimalizaèného problému aj jeho cie¾ovou funkciou. Typickım príkladom je optimalizácia spojitıch viac rozmernıch funkcií, kde sa optimum funkcie dá ¾ahko porovna ako èíslo. Avšak napríklad pri funkciách, ktorıch vısledkom je len pravdivostná hodnota, je aké odlíši lepšie a horšie riešenie. Pri takıchto prípadoch je moné napríklad hodnoti riešenie pod¾a toho ko¾ko èastí je nesprávnych etc.. Ïalším prípadom cie¾ovej funkcie, ktorú je potrebné upravova sú funkcie, ktoré je príliš nákladné poèíta. Takéto funkcie môu by nahradené funkciou, ktorá ráta odhad tejto funkcie a tak urıchli beh metaheuristiky\cite{MetaMainBook}.
+
+Metaheuristiky a heuristiky môeme deli\cite{ReviewNatureInspired} pod¾a rôznych kritérií:
 \begin{my_itemize}
  \item
  {
-    \textbf{PrÃ­rodou inÅ¡pirovanÃ© vs. OstatnÃ©} - PrÃ­rodou inÅ¡pirovanÃ© algoritmy mÃ´Å¾eme deliÅ¥ na
+    \textbf{Prírodou inšpirované vs. Ostatné} - Prírodou inšpirované algoritmy môeme deli na
     \begin{my_itemize}
-     \item Biologicky inÅ¡pirovanÃ© \ref{fyz_chem_algo}
-     \item Fyzikou a chÃ©miou inÅ¡pirovanÃ© \ref{bio_algo}
-     \item OstatnÃ©
+     \item Biologicky inšpirované \ref{fyz_chem_algo}
+     \item Fyzikou a chémiou inšpirované \ref{bio_algo}
+     \item Ostatné
     \end{my_itemize} 
  }
- \item \textbf{S pouÅ¾itÃ­m pamÃ¤te vs. Bez pouÅ¾itia pamÃ¤te} - heuristiky bez pouÅ¾itia pamÃ¤te sÃº naprÃ­klad tie, ktorÃ© pouÅ¾Ã­vajÃº princÃ­p Markovovej reÅ¥aze, tzn. Å¾e si nepamÃ¤tajÃº navÅ¡tÃ­venÃ© stavy
- \item \textbf{ZaloÅ¾enÃ© na populÃ¡ciÃ­ vs. ZaloÅ¾enÃ© na jednom rieÅ¡enÃ­} - heuristiky zaloÅ¾enÃ© na jednom rieÅ¡enÃ­ pouÅ¾Ã­vajÃº len jedno zvyÄajne najlepÅ¡ie rieÅ¡enÃ­ a na zÃ¡klade neho ho vylepÅ¡ujÃº.
+ \item \textbf{S pouitím pamäte vs. Bez pouitia pamäte} - heuristiky bez pouitia pamäte sú napríklad tie, ktoré pouívajú princíp Markovovej reaze, tzn. e si nepamätajú navštívené stavy
+ \item \textbf{Zaloené na populácií vs. Zaloené na jednom riešení} - heuristiky zaloené na jednom riešení pouívajú len jedno zvyèajne najlepšie riešení a na základe neho ho vylepšujú.
  
- \item \textbf{DeterministickÃ© vs. StochastickÃ©}
+ \item \textbf{Deterministické vs. Stochastické}
 \end{my_itemize}
 \cite{MetahYang,MetaMainBook,MetahA}
 
-\subsection{PrÃ­rodou inÅ¡pirovanÃ© algoritmy}
-\subsubsection{Fyzikou a chÃ©miou inÅ¡pirovanÃ© algoritmy}\label{fyz_chem_algo}
-Fyzikou inÅ¡pirovanÃ© algoritmy sÃº, ako je zrejmÃ© z nÃ¡zvu, optimalizaÄnÃ© algoritmy inÅ¡pirovanÃ© fyzikÃ¡lnymi procesmi a zÃ¡konmi vo vesmÃ­re. ZaÄiatok takÃ½chto algoritmov moÅ¾no hÄ¾adaÅ¥ po publikovanÃ­ prÃ¡ce o kvantovo-inÅ¡pirovanÃ½ch poÄÃ­taÄoch v roku 1982\cite{QMechComp}. TÃ¡to prÃ¡ca otvorila cestu prvÃ©mu fyzikÃ¡lne zaloÅ¾enÃ©mu algoritmu v roku 1995 nazvanÃ©mu Kvantovo-inÅ¡pirovanÃ½ genetickÃ½ algoritmus\cite{QIGA}. HlavnÃ½ "boom" takÃ½chto algoritmov sa zaÄal po roku 2000, keÄ sa zaÄali vznikaÅ¥ fyzikÃ¡lne algoritmy inÅ¡pirovanÃ© rÃ´znymi oblasÅ¥ami fyzika ako je Newtonov gravitaÄnÃ½ zÃ¡kon (Algoritmus gravitaÄnÃ½m hÄ¾adanÃ­m - GSA, OptimalizÃ¡cia centrÃ¡lnou silou - CFO,...), teÃ³riou vesmÃ­ru (Big Bang Big Crunch), elektromagnetizmom  alebo kvantovou mechanikou (Kvantovo inÅ¡pirovanÃ½ roj ÄastÃ­c - QIPS).\cite{PhysicsSurvey}
-\subsubsection*{Kvantovo-inÅ¡pirovanÃ½ genetickÃ½ algoritmus}
-Tento fyzikÃ¡lne inÅ¡pirovanÃ½ algoritmus je prvÃ½ z fyzkÃ¡lne inÅ¡pirovanÃ½ch algoritmov a vznikol v roku 1995. Tento algoritmus je zaloÅ¾enÃ½  na beÅ¾nom genetickom algoritme, kde populÃ¡cia chromozÃ³mov rieÅ¡enÃ­ mutuje, krÃ­Å¾i sa a na zÃ¡klade nÃ¡sledne vypoÄÃ­tanej fitnes funkcie novo vzniknutÃ½ch jedincov sa vyberie n jedincov do ÄalÅ¡ej generÃ¡cie. V tomto algoritme sa vÅ¡ak pri vÃ½poÄte neberie do Ãºvahy len "dobrosÅ¥" rieÅ¡enia, ale aj to ako veÄ¾mi sa lÃ­Å¡ia rieÅ¡enia od najlepÅ¡ieho rieÅ¡enia (ÄÃ­m viac, tÃ½m lepÅ¡ie). TakÃ½mto spÃ´sobom sa udrÅ¾iavame lokÃ¡lne optimÃ¡, ktorÃ© potom pomÃ¡hajÃº pri hÄ¾adanÃ­ globÃ¡lnych optÃ­m.
-OdliÅ¡nosÅ¥ou tohoto algoritmu od beÅ¾nÃ©ho genetickÃ©ho algoritmu je pouÅ¾itie princÃ­pu superpozÃ­cie elektrÃ³nov. SuperpozÃ­cia elektrÃ³nov znamenÃ¡, Å¾e podÄ¾a toho akÃº energiu mÃ¡ elektrÃ³n, tak sa mÃ´Å¾e s nejakou pravdepodobnosÅ¥ nachÃ¡dzaÅ¥ na viacerÃ½ch vrstvÃ¡ch okolo jadra atÃ³mu. Toto je vyuÅ¾itÃ© aj v tomto algoritme v zmysle, Å¾e existuje viacero vesmÃ­rov, kde sa rieÅ¡i beÅ¾nÃ½ genetickÃ½ algoritmus a tieto sa mÃ´Å¾u navzÃ¡jom krÃ­Å¾iÅ¥ a mutovaÅ¥. Toto vÅ¡ak mÃ´Å¾e nastaÅ¥ len medzi gÃ©nmi v chromozÃ³me na rovnakej pozÃ­ciÃ­ i. TÃ½mto sa simuluje preskakovanie elektrÃ³nu z vrstvy na vrstvu\cite{QIGA}.
+\subsection{Prírodou inšpirované algoritmy}
+\subsubsection{Fyzikou a chémiou inšpirované algoritmy}\label{fyz_chem_algo}
+Fyzikou inšpirované algoritmy sú, ako je zrejmé z názvu, optimalizaèné algoritmy inšpirované fyzikálnymi procesmi a zákonmi vo vesmíre. Zaèiatok takıchto algoritmov mono h¾ada po publikovaní práce o kvantovo-inšpirovanıch poèítaèoch v roku 1982\cite{QMechComp}. Táto práca otvorila cestu prvému fyzikálne zaloenému algoritmu v roku 1995 nazvanému Kvantovo-inšpirovanı genetickı algoritmus\cite{QIGA}. Hlavnı "boom" takıchto algoritmov sa zaèal po roku 2000, keï sa zaèali vznika fyzikálne algoritmy inšpirované rôznymi oblasami fyzika ako je Newtonov gravitaènı zákon (Algoritmus gravitaènım h¾adaním - GSA, Optimalizácia centrálnou silou - CFO,...), teóriou vesmíru (Big Bang Big Crunch), elektromagnetizmom  alebo kvantovou mechanikou (Kvantovo inšpirovanı roj èastíc - QIPS).\cite{PhysicsSurvey}
+\subsubsection*{Kvantovo-inšpirovanı genetickı algoritmus}
+Tento fyzikálne inšpirovanı algoritmus je prvı z fyzkálne inšpirovanıch algoritmov a vznikol v roku 1995. Tento algoritmus je zaloenı  na benom genetickom algoritme, kde populácia chromozómov riešení mutuje, kríi sa a na základe následne vypoèítanej fitnes funkcie novo vzniknutıch jedincov sa vyberie n jedincov do ïalšej generácie. V tomto algoritme sa však pri vıpoète neberie do úvahy len "dobros" riešenia, ale aj to ako ve¾mi sa líšia riešenia od najlepšieho riešenia (èím viac, tım lepšie). Takımto spôsobom sa udriavame lokálne optimá, ktoré potom pomáhajú pri h¾adaní globálnych optím.
+Odlišnosou tohoto algoritmu od beného genetického algoritmu je pouitie princípu superpozície elektrónov. Superpozícia elektrónov znamená, e pod¾a toho akú energiu má elektrón, tak sa môe s nejakou pravdepodobnos nachádza na viacerıch vrstvách okolo jadra atómu. Toto je vyuité aj v tomto algoritme v zmysle, e existuje viacero vesmírov, kde sa rieši benı genetickı algoritmus a tieto sa môu navzájom kríi a mutova. Toto však môe nasta len medzi génmi v chromozóme na rovnakej pozícií i. Tımto sa simuluje preskakovanie elektrónu z vrstvy na vrstvu\cite{QIGA}.
 \subsubsection*{Big Bang Big Crunch}
-Big Bang Big Crunch je ÄalÅ¡Ã­m fyzikou inÅ¡pirovanÃ½m algoritmom. HlavnÃ½m princÃ­pom, ktorÃ½m sa tento algoritmus inÅ¡piruje je rozptÃ½lenie hmoty a energie vo vesmÃ­re (Big bang) a nÃ¡slednÃ© zhlukovanie tejto hmoty vo vhodnÃ½ch pozÃ­ciÃ¡ch ako sa energia vesmÃ­ru zniÅ¾uje (Big crunch). Tento algoritmus je zaloÅ¾enÃ½ na populÃ¡ciÃ­ agentov, takÅ¾e sa dÃ¡ klasifikovaÅ¥ ako rojovÃ½.
-Algoritmus funguje tak, Å¾e najprv sa vytvorÃ­ poÄiatoÄnÃ¡ nÃ¡hodnÃ¡ populÃ¡cia v n-rozmernom priestore (Big bang). Potom sa pomocou rovnice\ref{BigCrunchEq} vypoÄÃ­ta "stred hmoty", ÄiÅ¾e stred z vygenerovanÃ½ch bodov (Big crunch). 
+Big Bang Big Crunch je ïalším fyzikou inšpirovanım algoritmom. Hlavnım princípom, ktorım sa tento algoritmus inšpiruje je rozptılenie hmoty a energie vo vesmíre (Big bang) a následné zhlukovanie tejto hmoty vo vhodnıch pozíciách ako sa energia vesmíru zniuje (Big crunch). Tento algoritmus je zaloenı na populácií agentov, take sa dá klasifikova ako rojovı.
+Algoritmus funguje tak, e najprv sa vytvorí poèiatoèná náhodná populácia v n-rozmernom priestore (Big bang). Potom sa pomocou rovnice \ref{BigCrunchEq} vypoèíta "stred hmoty", èie stred z vygenerovanıch bodov (Big crunch). 
 \begin{equation}\label{BigCrunchEq}
    x^{\xrightarrow{}c} = \frac{\sum_{i=1}^{N}\frac{1}{f^i}x^{-i}}{\sum_{i=1}^{N}\frac{1}{f^i}}
 \end{equation}
-,  \(x^{i}\) je i-ty vygenerovanÃ½ bod a \(f^i\) je fitnes funkcia bodu \(x^i\).\newline
-NÃ¡sledne zasa nasleduje fÃ¡za "Big bang", ktorÃ¡ uÅ¾ ale negeneruje body nÃ¡hodne, ale sÃº tieto body vygenerovanÃ© rovnicou \ref{BigBangEq}, ktorÃ¡ priÄÃ­ta alebo odÄÃ­ta ÄÃ­slo na zÃ¡klade normÃ¡lneho rozdelenia, ktorÃ©ho variancia sa s pribÃºdajÃºcimi iterÃ¡ciami zniÅ¾uje.
+,  \(x^{i}\) je i-ty vygenerovanı bod a \(f^i\) je fitnes funkcia bodu \(x^i\).\newline
+Následne zasa nasleduje fáza "Big bang", ktorá u ale negeneruje body náhodne, ale sú tieto body vygenerované rovnicou \ref{BigBangEq}, ktorá prièíta alebo odèíta èíslo na základe normálneho rozdelenia, ktorého variancia sa s pribúdajúcimi iteráciami zniuje.
 \begin{equation}\label{BigBangEq}
 x^{new} = x^{c} + lr/k
 \end{equation}
-,kde \(x^c\) je stred hmoty, l je hornÃ½ limit parametra, r je nÃ¡hodnÃ© ÄÃ­slo z normÃ¡lneho rozdelenia a k je poÄet iterÃ¡ciÃ­.
-Big crunch v tomto algoritme reprezentuje proces exploitÃ¡cie a Big bang reprezentuje proces explorÃ¡cie, ktorÃ¡ sa ale s iterÃ¡ciami zniÅ¾uje, kvÃ´li zniÅ¾ovaniu variancie a tÃ½m pÃ¡dom niÅ¾Å¡ej pravdepodobnosti vysokÃ½ch ÄÃ­sel. 
-\subsubsection{Biologicky inÅ¡pirovanÃ© algoritmy}\label{bio_algo}
- Biologicky inÅ¡pirovanÃ© algoritmy sÃº druhom prÃ­rodou inÅ¡pirovanÃ½ch algoritmov, ktorÃ© vznikli na zÃ¡klade pozorovania sprÃ¡vania Å¾ivoÄÃ­chov alebo procesov ktorÃ½mi na nich vplÃ½vala prÃ­roda. TakÃ½to proces je naprÃ­klad evolÃºcia alebo symbiÃ³za. Algoritmy sa inÅ¡pirovali rÃ´znymi druhmi zvierat, Äi uÅ¾ malÃ½mi ako baktÃ©rie a salpy, alebo veÄ¾kÃ½mi ako veleryby alebo slony. ZvyÄajne sa tieto algoritmy inÅ¡pirujÃº spÃ´sobom hÄ¾adania potravy alebo lovu tÃ½chto zvierat. PrÃ­roda je dobrÃ½m zdrojom inÅ¡pirÃ¡cie optimalizaÄnÃ½ch algoritmov, pretoÅ¾e prÃ­roda mala miliÃ³ny rokov na optimalizÃ¡ciu sprÃ¡vania zvierat a Å¾ivoÄÃ­chov. 
-%\subsubsection*{NÃ¡vrhovÃ© vzory pouÅ¾itÃ© pri tvorbe biologicky inÅ¡pirovanÃ½ch algoritmov}
-\subsubsection*{EvoluÄnÃ© a genetickÃ© algoritmy}
-\subsubsection*{Rojovo inÅ¡pirovanÃ© algoritmy}
-\subsubsection*{EkolÃ³giou inÅ¡pirovanÃ© algoritmy}
-\subsubsection*{UmelÃ½ imunitnÃ½ systÃ©m}
-\subsection{OstatnÃ©}
+,kde \(x^c\) je stred hmoty, l je hornı limit parametra, r je náhodné èíslo z normálneho rozdelenia a k je poèet iterácií.
+Big crunch v tomto algoritme reprezentuje proces exploitácie a Big bang reprezentuje proces explorácie, ktorá sa ale s iteráciami zniuje, kvôli zniovaniu variancie a tım pádom nišej pravdepodobnosti vysokıch èísel. 
+\subsubsection{Biologicky inšpirované algoritmy}\label{bio_algo}
+ Biologicky inšpirované algoritmy sú druhom prírodou inšpirovanıch algoritmov, ktoré vznikli na základe pozorovania správania ivoèíchov alebo procesov ktorımi na nich vplıvala príroda. Takıto proces je napríklad evolúcia alebo symbióza. Algoritmy sa inšpirovali rôznymi druhmi zvierat, èi u malımi ako baktérie a salpy, alebo ve¾kımi ako veleryby alebo slony. Zvyèajne sa tieto algoritmy inšpirujú spôsobom h¾adania potravy alebo lovu tıchto zvierat. Príroda je dobrım zdrojom inšpirácie optimalizaènıch algoritmov, pretoe príroda mala milióny rokov na optimalizáciu správania zvierat a ivoèíchov. 
+%\subsubsection*{Návrhové vzory pouité pri tvorbe biologicky inšpirovanıch algoritmov}
+\subsubsection*{Evoluèné a genetické algoritmy}
+Evoluèné a genetické algoritmy sú algoritmy zaloené na princípe evolúcie v prírode. Vo všeobecnosti sú to stochastické algoritmy zaloené na populácií, kde preíva nejsilnejší jedinec, tzn. jedinec s najlepšou hodnotou cie¾ovej funkcie. Vlastnos evolúcie je v tom, e populácie v ïalších iteráciách sú vytvorené z predchádzajúcich populácií mutaènımi a rozmnoovacími sa operátormi. Základy genetickıch algoritmov poloil John Holland v roku 1975\cite{JHollandGen}. Príkladom novšieho genetického algoritmu je Optimalizácia pomocou ryového po¾a\cite{PaddyField}. Genetické a evoluèné algoritmy rıchlo strácajú efektivitu pri multimodálnych a vysoko rozmernıch problémoch, kde je vysoká pravdepodobnos uviaznutia v lokálnom optime alebo potrebnı vysokı poèet iterácií.\cite{BioInspiredOverview}
+\paragraph{Genetické simulované íhanie}
+Genetické simulované íhanie je algoritmus, ktorı spája vlastnosti simulovaného íhania a genetického algoritmu. Algoritmus prebehne rovnako ako benı genetickı algoritmus, avšak na konci sa okrem najlepších, optimálnych riešení sa do populácie pridajú aj zlé riešenia na základe pravdepodobnosti p, ktorá sa s pribúdajúcimi iteráciami zmenšuje.\cite{needed}
+\subsubsection*{Rojovo inšpirované algoritmy}
+\subsubsection*{Ekológiou inšpirované algoritmy}
+\subsubsection*{Ostatné (?)}
+Medzi ostatné algoritmy patria všetky, ktoré sme dosia¾ nezaradili, take napríklad bio-inšpirované algoritmy, ktoré ale niesú rojovo inšpirované.
+\paragraph{Optimalizácia ope¾ovaním kvetov}
+\subsection{Ostatné (?)}
+\subsubsection{Uèenie zaloené na opozící (Opposition based learning)}
 
-
-\subsection{Biologicky inÅ¡pirovanÃ© algoritmy v CRAN-e}
-
+\subsection{Biologicky inšpirované algoritmy v CRAN-e}
