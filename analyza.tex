@@ -114,7 +114,13 @@ Metóda najstrmšieho vıstupu resp. zostupu sa dá poui ak vieme vyráta parciáln
  f(x^t - \alpha \nabla f(x^t)) - f(x^t) ? ?\sigma \alpha ||\nabla f(x^t)||^2
 \end{equation}
 
-Koordinátová metóda najstrmšieho vıstupu je odvodená od metódy najstrmšieho vıstupu avšak pri kadom kroku zlepšujeme vısledok len v oh¾ade na jedno \(x_i\) z optimalizaènej funkcie \(f(x_1, x_2, ... x_i, ... x_n)\). Tieto èasti vektora môeme optimalizova v smere z¾ava doprava, tam a naspä alebo optimalizujeme komponent s najväèšou absolútnou hodnotou
+Koordinátová metóda najstrmšieho vıstupu je odvodená od metódy najstrmšieho vıstupu avšak pri kadom kroku zlepšujeme vısledok len v oh¾ade na jedno \(x_i\) z optimalizaènej funkcie \(f(x_1, x_2, ... x_i, ... x_n)\).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/hillClimbing.png}
+    \caption{Postup optimalizácie metódou najstrmšieho vıstupu v jednom smere \cite{yuret1994genetic}}
+    \label{fig:HillClimbing}
+\end{figure}Tieto èasti vektora môeme optimalizova v smere z¾ava doprava, tam a naspä alebo optimalizujeme komponent s najväèšou absolútnou hodnotou
 \cite{3}.
 
 \section{Metaheuristiky a heuristiky}\label{Metaheuristiky a heuristiky}
@@ -135,6 +141,13 @@ Reprezentácie riešení môu by:
  \item \textbf{Nelineárne} - zvyèajne reprezentované grafovou štruktúrou, reprezentujú sa tam stavy jedno k jednej, jedno ku viacerım, viaceré ku jednej, medzi riešeniami a reprezentáciami riešení
 \end{my_itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Nonlinearkoding.png}
+    \caption{Vizuálne zobrazenie nelinárnej reprezentácie riešení}
+    \label{fig:NonLinearSol}
+\end{figure}
+
 Vo ve¾kom mnostve problémov môe by funkcia zadaného optimalizaèného problému aj jeho cie¾ovou funkciou. Typickım príkladom je optimalizácia spojitıch viac rozmernıch funkcií, kde sa optimum funkcie dá ¾ahko porovna ako èíslo. Avšak napríklad pri funkciách, ktorıch vısledkom je len pravdivostná hodnota, je aké odlíši lepšie a horšie riešenie. Pri takıchto prípadoch je moné napríklad hodnoti riešenie pod¾a toho ko¾ko èastí je nesprávnych etc.. Ïalším prípadom cie¾ovej funkcie, ktorú je potrebné upravova sú funkcie, ktoré je príliš nákladné poèíta. Takéto funkcie môu by nahradené funkciou, ktorá ráta odhad tejto funkcie a tak urıchli beh metaheuristiky\cite{MetaMainBook}.
 
 Metaheuristiky a heuristiky môeme deli\cite{ReviewNatureInspired} pod¾a rôznych kritérií:
@@ -148,6 +161,43 @@ Metaheuristiky a heuristiky môeme deli\cite{ReviewNatureInspired} pod¾a rôznyc
      \item Ostatné
     \end{my_itemize} 
  }
+, avšak deli prírodou inšpirované metaheuristky je zloité, pretoe algoritmy môu naraz spada do viacerıch kategórií alebo aj do iadnej, resp. je zloité urèi pod¾a èoho a ako detailne by sa heuristiky mali deli.
+ 
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/Delenie.png}
+    \caption{Diagram delenia prezentovaného v tejto práci}
+    \label{fig:Delenie}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        Skratka & Názov\\
+        \hline
+        BBBC & Big Bang Big Crunch\cite{BBBC} \\
+        
+        GSA & H¾adanie gravitáciou (Gravitational search algorithm) \\
+        
+        SA & Simulované íhanie (Simulated annealing)\cite{SA} \\
+        
+        PSO & Optimalizácia rojom èastíc (Particle swarm optimization)\cite{kennedy2011particle}\\
+        PS2O & PS2O\cite{chen2008optimization}\\
+        MSA & Optimalizacia h¾adaní molí (Moth search optimization)\cite{wang2016moth}\\
+        BA & Optimalizacia netopiermi(Bat algorithm) \cite{yang2010new} \\
+        QIGA & Kvantovo-inšpirovanı genetickı algoritmus\cite{QIGA} \\
+        DE & Diferenciálna evolúcia\cite{storn1997differential} \\
+        GASA & Genetické simulované íhanue\cite{GASA} \\
+        FPO & Optimalizácia ope¾ovaním kvetov\cite{yang2012flower}\\
+        ASO & Optimalizácia anrachistickou spoloènosou \cite{ahmadi2011anarchic}\\
+        \hline
+    \end{tabular}
+    \caption{Vysvetlenie skratiek v diagrame delenia}
+    \label{tab:my_label}
+\end{table}
+ 
+
  \item \textbf{S pouitím pamäte vs. Bez pouitia pamäte} - heuristiky bez pouitia pamäte sú napríklad tie, ktoré pouívajú princíp Markovovej reaze, tzn. e si nepamätajú navštívené stavy
  \item \textbf{Zaloené na populácií vs. Zaloené na jednom riešení} - heuristiky zaloené na jednom riešení pouívajú len jedno zvyèajne najlepšie riešení a na základe neho ho vylepšujú.
  
@@ -181,26 +231,100 @@ Big crunch v tomto algoritme reprezentuje proces exploitácie a Big bang reprezen
 Evoluèné a genetické algoritmy sú algoritmy zaloené na princípe evolúcie v prírode. Vo všeobecnosti sú to stochastické algoritmy zaloené na populácií, kde preíva nejsilnejší jedinec, tzn. jedinec s najlepšou hodnotou cie¾ovej funkcie. Vlastnos evolúcie je v tom, e populácie v ïalších iteráciách sú vytvorené z predchádzajúcich populácií mutaènımi a rozmnoovacími sa operátormi. Základy genetickıch algoritmov poloil John Holland v roku 1975\cite{JHollandGen}. Príkladom novšieho genetického algoritmu je Optimalizácia pomocou ryového po¾a\cite{PaddyField}. Genetické a evoluèné algoritmy rıchlo strácajú efektivitu pri multimodálnych a vysoko rozmernıch problémoch, kde je vysoká pravdepodobnos uviaznutia v lokálnom optime alebo potrebnı vysokı poèet iterácií\cite{BioInspiredOverview}.
 \paragraph{Genetické simulované íhanie}
 Genetické simulované íhanie je algoritmus, ktorı spája vlastnosti simulovaného íhania a genetického algoritmu. Algoritmus prebehne rovnako ako benı genetickı algoritmus, avšak na konci sa okrem najlepších, optimálnych riešení sa do populácie pridajú aj zlé riešenia na základe pravdepodobnosti p, ktorá sa s pribúdajúcimi iteráciami zmenšuje.\cite{GASA}
+
 \subsubsection*{Rojovo inšpirované algoritmy}
-\subsubsection*{Ekológiou inšpirované algoritmy}
-\subsubsection*{Ostatné (?)}
-Medzi ostatné algoritmy patria všetky, ktoré sme dosia¾ nezaradili, take napríklad bio-inšpirované algoritmy, ktoré ale niesú rojovo inšpirované.
-\paragraph{Optimalizácia ope¾ovaním kvetov}
-\subsection{Ostatné (?)}
-\subsubsection{Uèenie zaloené na opaènej hodnote (Opposition based learning)}
+
+Rojovo inšpirované optimalizaèné algoritmy sú všetky optimalizaèné algoritmy, ktoré pouívajú princíp rojovej inteligencie. Rojová inteligencia je princíp zaloenı na sociálnom správaní rojov, kàd¾ov a stád v prírode. Je to hlavne odpozorovanie princípu sociálneho h¾adania potravy takıchto rojov. Pri tomto princípe je vidie, e h¾adanie potravy jedincom bıva neúspešnejšie ako h¾adanie potravy rojom, pretoe jedinec nedokáe vníma celé prostredie ako celok a tım pádom, je moné, e sa jedinec na základe neúplnıch informácií rozhodne pre neoptimálne riešenie. Avšak ak je jedinec ovplyvòovanı ïalšími jedincami roja, tak tí ho vedia svojím vplyvom pritiahnu k optimálnemu riešeniu. Teda môeme rojom oznaèi roj, kedy samostatnı èlenovia roja sú sami osebe povaovanı za neinteligentné èasti, avšak v roji sa správajú ako ucelenı inteligentnı systém schopnı riešenia zloitıch problémov. Základnou charakteristikou rojovıch optimalizaènıch algoritmov je populácia agentov zbierajúcich informácie v priestore h¾adania. Tieto agenty potom na základe získanıch informácií o priestore h¾adania menia svoje správanie a pozíciu\cite{gazi2011swarm}. Takéto algoritmy väèšinou pri zbere informácií uplatòujú 4 základné princípy na spracovanie tıchto informácií a to \textbf{rozširovanie}, \textbf{spájanie}, \textbf{vyparovanie} a \textbf{odpudzovanie}.
+
+\textbf{Rozširovanie} - spoèíva v tom, e jednotlivé agenty zdie¾ajú nájdené informácie o priestore s ostatnımi èasticami. Buï tieto informácie zdie¾ajú len so susednımi agentami, èo sa oznaèuje ako \textit{lbest} topológia alebo ich zdie¾ajú so všetkımi ostatnımi agentami, èo sa oznaèuje ako \textit{gbest} topológia\cite{kennedy2006swarm}.
+
+\textbf{Spájanie} - vyjadruje, e získané informácie sú nejako spracované a spájané, pretoe uchováva všetky získané informácie je zbytoèné a systém zaaujúce. Napr. ráta sa z nich priemer.
+
+\textbf{Vyparovanie} - vyparovaním sa oznaèuje zniujúca sa relevancia získanıch informácií s èasom. Ako analógia sa dá poui vyparovanie sa feromónov mravcov s èasom a tım pádom slabšia príalivos cesty, na ktorej sú tieto feromóny.
+
+\textbf{Odpudzovanie} - je princíp, ktorı zaruèuje, e agenty sa nebudú naraz nachádza na jednom a tom istom mieste rovnako ako sa v "rojoch" zvierat nemôe na jednom a tom istom mieste nachádza viacero jednotlivcov\cite{fernandez2013description}.
+
+Taktie, aby bol roj schopnı h¾adanie v priestore h¾adania musí spåòa tieto základné pravidlá:
+\begin{my_itemize}
+ \item populácia musí by schopná reagova na podmienky prostredia
+ \item populácia musí by schopná robi jednoduchı priestorové a èasové vıpoèty
+ \item populácia musí by nemala meni svoje správanie pri kadej zmene prostredia
+ \item populácia by mala zmeni svoje správanie, ak je zmena prostredia nato¾ko ve¾ká, e to stojí za vıpoètovú cenu zmeny
+\end{my_itemize}
+\paragraph{Optimalizácia rojom èastíc (Particle Swarm Optimization)}
+Optimalizácia rojom èastíc je jednım z prvıch rojovıch algoritmov navrhnutı v roku 1995. Tento algoritmus je stochastickı optimalizaènı algoritmus zaloenı na populácií. Optimalizácia rojom èastíc je algoritmus zaloenı na sociálno-psychologickej metafory riešenia problému èlovekom. Èlovek, ktorı má rieši problém ho väèšinou rieši komunikáciou s inımi ¾uïmi. Potom ovplyvnenı riešeniami okolo seba a svojím vlastnım presvedèením dôjde k nejakému záveru. V kontexte vektorov v n-dimenzionálnom priestore to môeme vyjadri pohybom bodu, ktorı je danı takouto rovnicou
+\begin{equation}
+    v_{id}^{t+1} = \alpha v_{id}^{t} + U(0,\beta)(p_{id} - x_{id}^{t}) + U(0,\beta)(p_{gd} - x_{id}^{t})
+\end{equation}
+\begin{equation}
+    x_{id}^{t+1} = x_{id}^{t} + v_{id}^{t} 
+\end{equation}
+,kde \(v_{id}\) je rıchlos i-tej èastice v dimenzii d, \(p_{id}\) je najlepšie dosia¾ dosiahnuté riešenie èasticou i a \(p_{gd}\) je najlepšie dosia¾ dosiahnuté riešenie susedmi èastice i. 
+
+Existuje aj varianta uvedená v roku 2004, kde sa namiesto najlepšieho riešenia zo susedov berie do úvahy priemer najlepších riešení susedov.\cite{mendes2004population}
+
+Celkovo sa tento algoritmus dá v benej reèi charakterizova ako Nová pozícia = Stará pozícia + sociálny vplyv + vytrvalos.\cite{kennedy2011particle}.
+
+\subsubsection*{Ostatné}
+Keïe presná klasifikácia biologicky inšpirovanıch algoritmov neexistuje do tejto sekcie sme zaradil všetky, ktoré sme dosia¾ nezaradili, take napríklad bio-inšpirované algoritmy, ktoré nie sú rojovo inšpirované. Takéto algoritmy sa zasa môu ïalej deli pod¾a èasti prírody, ktorou boli inšpirované napríklad na algoritmy inšpirované ekológiou ako je napríklad obmenená Optimalizácia rojom èastíc \textbf{PS2O} \ref{ps20}, ktorá sa zamerala na vzahy v ekosystémoch. Ïalšími algoritmami sú algoritmy, ktoré sa nezamerali na konkrétnu oblas biológie, ale inšpirovali sa òou a nie sú rojovo inšpirované. Takım to príkladom je napríklad \textbf{Optimalizácia ope¾ovaním kvetov} \ref{opelKvety}\cite{binitha2012survey}.
+\paragraph{PS2O} \label{ps20}
+Tento algoritmus vzahy v ekosystémoch modeluje tak, e populácia èastíc je rozdelená na rôzne druhy. Jedinci jedného druhu medzi sebou spolupracujú ako v klasickom PSO, avšak druhy spolupracujú medzi sebou v symbióze, a to tak, e symbiotickému druhu poskytnú svoje najlepšie nájdené informácie a tak jedincov ovplyvòujú aj jedince iného druhu. Túto topológiu jedincov mono vidie na obrázku \ref{fig:PS2O} Ak však sa iadny jedinec z populácie po danom konštantnom poète iterácií algoritmu nezlepší, znamená to, e jedinci sú pod silnım stresom prostredia. Tım pádom náhodne vybraná polovica druhov vymrie a nahradia ich nové druhy. Takto sa modeluje zaseknutie optimalizácie v lokálnom minime a následne náhodná reinicializácia populácie\cite{chen2008optimization}. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/figure2.png}
+    \caption{Topológia komunikácie druhov a jedincov s topológiou \textit{lbest}}
+    \label{fig:PS2O}
+\end{figure}
+\paragraph{Optimalizácia ope¾ovaním kvetov}\label{opelKvety}
+Ope¾ovanie je jedinım z najèastejších spôsobov rozmnoovania v rastlinnom svete. Tak ako pri väèšine spôsobov rozmnoovania sa najviac dokáe rozmnoova najlepší jedinec. Existujú dva rôzne druhy ope¾ovania a to biotické a abiotické. Biotické ope¾ovanie je ope¾ovanie hlavne hmyzom, a tım pádom, na dlhšie vzdialenosti. Abiotické ope¾ovanie je ope¾ovanie najèastejšie sebou samım alebo vetrom, èo je hlavne moné na kratšie vzdialenosti. Potom tieto dva princípy boli pretavené do algoritmu tak, e na aktualizáciu terajšej pozície, buï princíp zaloenı na biotickom ope¾ovaní alebo abiotickom.
+Princíp zaloenı na biotickom ope¾ovaní berie do úvahy terajšiu pozíciu kvetu vzh¾adom na pozíciu najlepšieho kvetu v populácií, ktorıch vzah je parametrizovanı èíslom z Lévyho rozdelenia. Toto rozdelenie slúi na urèenie náhodnej dåky kroku. Abiotické ope¾ovanie reprezentuje aktualizácia na základe vzahu medzi kvetom a ïalším náhodnım kvetom v populácií, ktorı je parametrizovanı náhodnım èíslo z rovnomerného rozdelenia, èo z tohoto robí náhodné lokálne h¾adanie\cite{yang2012flower}.
+
+\subsection{Ostatné}
+Do tejto kategórie patria všetky ostatné algoritmy, ktoré je aké zaradi do niektorej z predchádzajúcich kategórií, pretoe boli inšpirované z viacerıch zdrojov ako napríklad sociológia alebo emócie.
+\paragraph{Optimalizácia anarchistickou spoloènosou}
+Optimalizácia anarchistickou spoloènosou je algoritmus zaloenı na ¾udskej spoloènosti, ktorej jedinci sa so zhoršujúcou situáciou správajú viac nepredvídate¾ne. Tento princíp sa uplatòuje pri vıber ïalšej pozície. V tomto algoritme existujú tri druhy vıberu ïalšej pozície a to 
+\begin{my_itemize}
+ \item \textbf{zaloenı na terajšej pozícií} - v tejto metóde sa uplatòujú metódy pohybu v lokálnom susedstve jedinca. Tieto metódy sa vyberajú pod¾a tzv. \textit{indexu nestálosti}, ktorı je ovplyvnenı tım, ako ve¾mi sa jedinec cíti nespokojnı so svojou situáciou oproti ostatnım jedincom v populácií.
+ \item \textbf{zaloenı na pozíciach inıch jedincov} - táto metóda zakladá svoj pohyb na najlepšom jedincovi v populácií. Avšak jedinci sa v tomto algoritme môu správa aj nepredvídavo a svoj pohyb zaloi na pozícií ktoréhoko¾vek iného jedinca. To èi sa jedinci správajú nepredvídavo je zaloené na hodnote tzv. \textit{indexu vonkajšej iregularity}.
+ \item \textbf{zaloenı na minulıch pozíciách} - pre tento tretí spôsob platia rovnaké princípy ako pre spôsob druhı, avšak aplikované na minulé pozície jedinca. Jedinec si taktie môe vybra aj iné ako optimálne pozície na základe hodnoty nazvanej \textit{index vnútornej iregularity}.
+\end{my_itemize}
+Vısledky všetkıch tıchto pohybov je potom nutné agregova v jeden vısledok. Pouité metódy by mali závisie od problému. Príkladom kombinaènej metódy je  pouitie najlepšieho vısledku alebo mutácia vıslednıch pozícií inšpirovaná genetickım algoritmom.
+\cite{ahmadi2011anarchic}
+\subsection{Uèenie zaloené na opaènej hodnote (Opposition based learning)}
 %tu urcite fig ako funguje OBL
-Uèenie zaloené na opaènıch hodnotách je metóda na zlepšenie rıchlosti konvergencie uèiacich sa a optimalizaènıch algoritmov predstavená v roku 2006.\cite{OBLorig}. Táto metóda je zaloená na princípe, e v najhoršom prípade pri náhodnom vybraní hodnôt na zaèiatku algoritmov je táto hodnota na 'opaènej strane'. Takımto spôsobom sa môeme spoèiatku rapídne priblíi k optimálnej hodnote. Túto metódu môeme matematicky v n-rozmernom priestore vyjadri takto
+Uèenie zaloené na opaènıch hodnotách je metóda na zlepšenie rıchlosti konvergencie uèiacich sa a optimalizaènıch algoritmov predstavená v roku 2006.\cite{OBLorig}. Táto metóda je zaloená na princípe, e v najhoršom prípade pri náhodnom vybraní hodnôt na zaèiatku algoritmov je táto hodnota na 'opaènej strane' ako vidno na obrázku \ref{fig:OblNormal}. Takımto spôsobom sa môeme spoèiatku rapídne priblíi k optimálnej hodnote. Túto metódu môeme matematicky v n-rozmernom priestore vyjadri takto
 \begin{equation}
     \Breve{x}_{i} = a_i + b_i - x_i 
 \end{equation}
 ,kde \(\Breve{x}_{i}\) je i-tá hodnota vektora súradníc opaèného riešenia a \(a_i\) a \(b_i\) sú ohranièenia tejto dimenzie priestoru, v ktorom h¾adáme a \(x_i\) je i-tá súradnica riešenia, ku ktorému h¾adáme opaèné riešenie.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/OblNormal.png}
+    \caption{Príklad pouitia opozície typu-I na zrıchlenie konvergencie}
+    \label{fig:OblNormal}
+\end{figure}
 
-Takáto metóda je nazıvaná opozícia typu-I a po jej publikácií bola implementovaná v mnostve rôznych optimalizaènıch heuristík ako napr. Optimalizácia pomocou mravcolevov\cite{AntLionOBL} alebo Vylepšená optimalizácia pomocou cvrèkov\cite{GrasshopperOBL}. Taktie vznikli upravené metódy uèenia zaloené na opaènej hodnote. Sú nimi napríklad úpravy opozície typu-I, ktoré umoòujú opaènému bod by pred ním resp. za ním s názvami \textbf{Kvázi opozícia typu-I} resp. \textbf{Super opozícia typu-I}\cite{OBLsurvey}. Tie vznikli metódy zaloené na u nájdenom optime a h¾adania opaènej hodnoty vzh¾adom na neho, nie vzh¾adom na priestor h¾adania. Takáto metóda môe by v n-rozmernom priestore reprezentovaná rovnicou
+Takáto metóda je nazıvaná opozícia typu-I a po jej publikácií bola implementovaná v mnostve rôznych optimalizaènıch heuristík ako napr. Optimalizácia pomocou mravcolevov\cite{AntLionOBL} alebo Vylepšená optimalizácia pomocou cvrèkov\cite{GrasshopperOBL}. Taktie vznikli upravené metódy uèenia zaloené na opaènej hodnote. Sú nimi napríklad úpravy opozície typu-I, ktoré umoòujú opaènému bodu by pred ním resp. za ním s názvami \textbf{Kvázi opozícia typu-I} resp. \textbf{Super opozícia typu-I}\cite{OBLsurvey}. Tie vznikli metódy zaloené na u nájdenom optime a h¾adania opaènej hodnoty vzh¾adom na neho, nie vzh¾adom na priestor h¾adania. Takáto metóda môe by v n-rozmernom priestore reprezentovaná rovnicou
 \begin{equation}
     \Breve{x} = 2x_{co} - x
 \end{equation}
-,kde \(x_{co}\) je doterajšie optimum a x je riešenie, ku ktorému h¾adáme opaènı riešenie. Takımto spôsobom však môeme vytvori riešenie, ktorı sa nachádza mimo priestoru h¾adania. Takéto riešenie nahradíme náhodne vygenerovanım riešením\cite{COOBL}.
+,kde \(x_{co}\) je doterajšie optimum a x je riešenie, ku ktorému h¾adáme opaènı riešenie. Takımto spôsobom však môeme vytvori riešenie, ktorı sa nachádza mimo priestoru h¾adania. Takéto riešenie nahradíme náhodne vygenerovanım riešením\cite{COOBL}.Na obrázku \ref{fig:COOBL} je vidno úspešne zlepšenie vısledku pomocou tohoto princípu.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/COOBL.png}
+    \caption{Príklad pouitia opozície na doteraz nájdenom optime. Doteraz nájdené optimum je oznaèené ako co, globálne optimum ako go}
+    \label{fig:COOBL}
+\end{figure}
 
 %bezne OBL na tie mole, co prehladavaju Optimum obl na tie co exploituju
 
 \subsection{Biologicky inšpirované algoritmy v CRAN-e}
+
+Jazyk R je jazyk orientovanı na štatistické operácie a spracovanie dát. Preto je zrejmé, e mnostvo modulov tohoto jazyka bude orientované na h¾adanie optima vo funkciách. A keïe našou úlohou je implementova balíèek jazyka R s optimalizaènım algoritmom. Je potrebné, aby sme sa oboznámili u s existujúcimi balíkmi spåòajúce rovnakı princíp. CRAN obsahuje viacero evoluènıch algoritmov ako Diferenciálna evolúcia alebo genetickı algoritmus. Z rojovıch algoritmov podobnıch nášmu implementovanému algoritmu sú to algoritmy ako Optimalizácia rojom èastíc, Optimalizácia netopiermi, Optimalizácia umelou kolóniou vèiel, Optimalizácia svätojánskymi muškami. Tieto informácie boli zozbierané, aby sme sa vyhli implementácií u existujúceho balíèka. Podrobnejší zoznam optimalizaènıch funkcií v \hyperlink{https://cran.r-project.org/web/views/Optimization.html}{CRAN-e}.
+
+\section{Zhodnotenie}
+
+S postupom technológie je èoraz èastejšie potrebné optimalizova také NP-problémy. Existuje ve¾ké mnostvo postupov ako optimalizova takéto problém. Sú to napríklad exaktné metódy na zistenie optima problémov ako dynamické programovanie a lineárne programovanie alebo iteratívne metódy, ktoré pomocou matematickıch vzahov zisujú smer postupu. Avšak takéto metódy pri ve¾kosti a mnohıch dimenziách dnešnıch problémov nedokáu poskytova riešenia v prijate¾nom èase. Tu prichádzajú do úvahy stochastické metaheuristky na riešenie takıchto NP-komplexnıch problémov, ktoré ponúkajú rozumnı kompromis medzi úplnou presnosou vısledku a èasom, ktorı je potrebnı na získanie takého to vısledku.
+Tieto metaheuristky sú vo väèšine prípadov inšpirované prírodou a jej spôsobom získavania optimálnych stratégií.
+
+Z preskúmanıch metaheuristík zisujeme, e tieto metaheuristky vo väèšine prípadov pozostávajú z dvoch princípov a to preh¾adávanie priestoru h¾adania a vyuívania doteraz nájdeného najlepšieho riešenia. Na preh¾adávanie priestoru riešenia sú pouívané rôzne spôsoby náhodnıch pohybov v priestore riešenia ako Lévyho lety, náhodnı pohyb alebo aj uèenia na základe opaènej hodnoty, ktorá preh¾adáva opaènú stranu okolo optima resp. opaènú stranu priestoru h¾adania. Vyuívanie doteraz nájdeného najlepšieho riešenia sa prejavuje v pouívaní jeho pozície ako referenèného bodu pre h¾adanie ïalších pozícií. V tejto analıze sme zistili, e pre nájdenie vısledku správne a rıchlo je dôleité tieto dve fázy riešenia správne rovnomerne pouíva a s beiacim èasom riešenia upravova ich pomer.
