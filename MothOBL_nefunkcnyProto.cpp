@@ -1,4 +1,3 @@
-#include <Rcpp.h>
 
 // This is a simple example of exporting a C++ function to R. You can
 // source this function into an R session using the Rcpp::sourceCpp 
@@ -20,6 +19,9 @@
 #include <functional>
 #include <cmath>
 #include <random>
+#include <omp.h>
+
+typedef double(*vFunctionCall)(std::vector<double> x);
 
 
 double levyFlightDist(double beta, double s)
@@ -37,30 +39,30 @@ class Moth
 public:
 	Moth() = default;
 
-	Moth(Rcpp::NumericVector newMothCoords)
+	Moth(std::vector<double> newMothCoords)
 		:_coords(newMothCoords)
 	{
 		_fitness = 0;
 	}
 
-	Rcpp::NumericVector getCoords()
+	std::vector<double> getCoords()
 	{
 		return this->_coords;
 	}
 
-	Rcpp::NumericVector getFitness()
+	double getFitness()
 	{
 		return this->_fitness;
 	}
 
-	void computeFitness(Rcpp::Function optFunction)
+	void computeFitness(vFunctionCall optFunction)
 	{
-		this->_fitness = Rcpp::as<double>(optFunction(this->_coords));
+		this->_fitness = optFunction(this->_coords);
 	}
 
 	void levyFlightMove(double maxWalkStep, size_t currGen)
 	{
-		double levy = levyFlightDist(1.5, 2); // s = 2, zistit dobru hodnotu
+		double levy = levyFlightDist(1.5, 2.0); // s = 2, zistit dobru hodnotu
 		double alpha = maxWalkStep / pow(currGen, 2);
 
 		for (auto coord : _coords)
@@ -85,9 +87,9 @@ public:
 		return this->_fitness < rhs._fitness;
 	}
 
-	Moth bestMothOBL(Moth bestMoth, Rcpp::NumericVector upperBounds, Rcpp::NumericVector lowerBounds, Rcpp::Function optFunc)
+	Moth bestMothOBL(Moth bestMoth, std::vector<double> upperBounds, std::vector<double> lowerBounds, vFunctionCall optFunc)
 	{
-		Rcpp::NumericVector newMothCoords(0.0, this->_coords.size());
+		std::vector<double> newMothCoords(this->_coords.size(), 0.0);
 
 		for (size_t i = 0; i < this->_coords.size(); i++)
 		{
@@ -95,7 +97,7 @@ public:
 			if (newMothCoords[i] < lowerBounds[i] || newMothCoords[i] > upperBounds[i])
 			{
 				if (upperBounds[i] < lowerBounds[i])
-					throw Rcpp::exception("Incorrect bounds -> upper bound lower than lower bound");
+					throw std::exception("Incorrect bounds -> upper bound lower than lower bound");
 				newMothCoords[i] = randomFromInterval(upperBounds[i], lowerBounds[i]);
 			}
 		}
@@ -107,9 +109,9 @@ public:
 		return returnMoth;
 	}
 
-	Moth boundsOBL(Rcpp::NumericVector upperBounds, Rcpp::NumericVector lowerBounds, Rcpp::Function optFunc)
+	Moth boundsOBL(std::vector<double> upperBounds, std::vector<double> lowerBounds, vFunctionCall optFunc)
 	{
-		Rcpp::NumericVector newMothCoords(0.0, this->_coords.size());
+		std::vector<double> newMothCoords(this->_coords.size(), 0.0);
 
 		for (size_t i = 0; i < this->_coords.size(); i++)
 		{
@@ -125,19 +127,64 @@ public:
 	}
 
 private:
-	Rcpp::NumericVector _coords;
+	std::vector<double> _coords;
 	double _fitness;
 };
 
-Rcpp::List MothOpt(Rcpp::Function optFunc, int maxGeneration, double maxWalkStep, Rcpp::NumericVector upperBounds, Rcpp::NumericVector lowerBounds)
+std::vector<Moth> generatePop(size_t popSize, const std::vector<double>& upperBounds, const std::vector<double>& lowerBounds)
 {
+	std::vector<Moth> returnVector;
+	size_t dimensions = upperBounds.size();
+	std::vector<std::vector<double>> popCoords(dimensions, std::vector<double>());
+	std::random_device rd{};
+	std::mt19937 gen{ rd() };
+	for (size_t i = 0; i < dimensions; i++)
+	{
+		double mean;
+		//cause overflow
+		if ((upperBounds[i] >= 0) ^ (lowerBounds[i] < 0)) //same sign?
+		{
+			mean = lowerBounds[i] + (upperBounds[i] - lowerBounds[i]) / 2;
+		}
+		else
+		{
+			mean = (upperBounds[i] + lowerBounds[i]) / 2;
+		}
+
+		double stddev = (upperBounds[i] - lowerBounds[i]) / 4;
+		stddev = (stddev > DBL_MAX / 4 ? DBL_MAX / 4 : stddev);
+		std::normal_distribution<double> distribution(mean, stddev);
+		for (size_t j = 0; j < popSize; j++)
+		{
+			popCoords[i].push_back(distribution(gen));
+		}
+	}
+
+	for (size_t i = 0; i < popSize; i++)
+	{
+		std::vector<double> currentMothCoords;
+		for (size_t j = 0; j < dimensions; j++)
+		{
+			currentMothCoords.push_back(popCoords[j][i]);
+		}
+
+		returnVector.emplace_back(currentMothCoords);
+	}
+
+	return returnVector;
+}
+// [[Rcpp::export]]
+Moth MothOpt(vFunctionCall optFunc, size_t popSize, int maxGeneration, double stopValue, double maxWalkStep, std::vector<double> upperBounds, std::vector<double> lowerBounds, int numThreads)
+{
+	omp_set_num_threads(numThreads);
 	size_t currentGeneration = 1;
-	std::default_random_engine generator;
+	std::random_device rd{};
+	std::mt19937 gen{ rd() };
 	std::normal_distribution<double> distribution(0.5, 0.1);
 	double goldenRatio = 1 + sqrt(5) / 2;
-	double scaleFactor = distribution(generator);
+	double scaleFactor = distribution(gen);
 	Moth bestMoth;
-	std::vector<Moth> population; //initialize, not sure how
+	std::vector<Moth> population = generatePop(popSize, upperBounds, lowerBounds);
 
 #pragma omp parallel for
 	for (int i = 0; i < population.size(); i++)
@@ -150,10 +197,9 @@ Rcpp::List MothOpt(Rcpp::Function optFunc, int maxGeneration, double maxWalkStep
 	for (; currentGeneration < maxGeneration; currentGeneration++)
 	{
 		std::sort(population.begin(), population.end());
-		int i = 0;
 		bestMoth = population[0];
 #pragma omp parallel for
-		for (; i < population.size() / 2; i++)
+		for (int i = 0; i < population.size() / 2; i++)
 		{
 			population[i].levyFlightMove(maxWalkStep, currentGeneration);
 			population[i].computeFitness(optFunc);
@@ -172,32 +218,42 @@ Rcpp::List MothOpt(Rcpp::Function optFunc, int maxGeneration, double maxWalkStep
 
 		}
 #pragma omp parallel for
-		for (; i < population.size(); i++)
+		for (int j = population.size() / 2 + 1; j < population.size(); j++)
 		{
 			double randDecider = ((double)rand() / (RAND_MAX));
 
 			if (randDecider < 0.5)
 			{
-				population[i].EqFiveSixMove(scaleFactor, goldenRatio, bestMoth);
+				population[j].EqFiveSixMove(scaleFactor, goldenRatio, bestMoth);
 			}
 			else
 			{
-				population[i].EqFiveSixMove(scaleFactor, 1 / goldenRatio, bestMoth);
+				population[j].EqFiveSixMove(scaleFactor, 1 / goldenRatio, bestMoth);
 			}
-			population[i].computeFitness(optFunc);
-			Moth OBLMoth = population[i].boundsOBL(upperBounds, lowerBounds, optFunc);
-			if (OBLMoth < population[i])
+			population[j].computeFitness(optFunc);
+			Moth OBLMoth = population[j].boundsOBL(upperBounds, lowerBounds, optFunc);
+			if (OBLMoth < population[j])
 			{
-				std::swap(OBLMoth, population[i]);
+				std::swap(OBLMoth, population[j]);
 			}
 		}
 
+		printf("%d:%lf\n", currentGeneration, bestMoth.getFitness());
 	}
 
-	return Rcpp::List::create(
-		_["Coords"] = bestMoth.getCoords(),
-		_["Value"] = bestMoth.getFitness()
-	);
+	return bestMoth;
+
+}
+
+double sphereFunction(std::vector<double> x)
+{
+	return (-20 * exp(-0.2 * sqrt(0.5 * (x[0] * x[0] + x[1] * x[1]))) -
+		exp(0.5 * (cos(2 * M_PI*x[0]) + cos(2 * M_PI*x[1]))) + M_E + 20);
+}
+
+int main()
+{
+	Moth d = MothOpt(sphereFunction, 25, 50, 0.5, 0.0, std::vector<double>(2, 5.0), std::vector<double>(2, -5.0), 2);
 
 }
 
@@ -207,4 +263,12 @@ Rcpp::List MothOpt(Rcpp::Function optFunc, int maxGeneration, double maxWalkStep
 //
 
 /*** R
+sphereFunction <- function(coords)
+{
+  result <- sum(coords^2)
+  return (result)
+}
+
+result <- MothOpt(sphereFunction, 25, 100, 0.5, c(10.0,10.0), c(-10.0,-10.0))
+result["Value"]
 */
