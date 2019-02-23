@@ -247,13 +247,14 @@ Moth MothOpt(vFunctionCall optFunc, size_t popSize, int maxGeneration, double st
 
 double sphereFunction(std::vector<double> x)
 {
-	return (-20 * exp(-0.2 * sqrt(0.5 * (x[0] * x[0] + x[1] * x[1]))) -
-		exp(0.5 * (cos(2 * M_PI*x[0]) + cos(2 * M_PI*x[1]))) + M_E + 20);
+	return std::transform_reduce(x.begin(),x.end(),x.begin, 0, std::multiplies<double>, std::plus<double>);
 }
 
 int main()
 {
 	Moth d = MothOpt(sphereFunction, 25, 50, 0.5, 0.0, std::vector<double>(2, 5.0), std::vector<double>(2, -5.0), 2);
+
+	return 0;
 
 }
 
